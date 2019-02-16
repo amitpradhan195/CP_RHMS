@@ -1,0 +1,15 @@
+.modal
+{
+	max-height: 100%;
+	overflow-y: auto;
+}
+
+#txt
+{
+	border-radius: 25px;
+}
+
+#categoriesContainer
+{
+	margin-bottom: -100px;
+}
