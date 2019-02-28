@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/motorbikelogo-96x96.png" type="image/x-icon">
-  <meta name="description" content="">
+  <meta name="description" content="Web Page Builder Description">
   <title>Home</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}" />
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}" />
@@ -20,11 +20,25 @@
   <link rel="stylesheet" type="text/css" href="{{url('assets/fontawesome/css/all.min.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{url('style.css') }}" />
   
+  
+  
 </head>
 <body>
-  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-g" data-rv-view="1029"><section class="menu cid-rgarQyhyTr" once="menu" id="menu1-g">
+    <script>
+      var msg = '{{Session::get('loginFirst')}}';
+      var exist = '{{Session::has('loginFirst')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+    </script>
 
-    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+
+  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"><section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
+
+    
+
+     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <div >
                 <span class="hamburger-icon"></span>
@@ -34,7 +48,7 @@
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="index">
-                         <img src="assets/images/motorbikelogo-96x96.png" alt="bikeLogo" title="" style="height: 3.8rem;">
+                         <img src="assets/images/motorbikelogo-96x96.png" alt="bikeLogo" title="" style="height: 3.6rem;">
                     </a>
                 </span>
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-5" href="index">RHMS</a>
@@ -53,15 +67,19 @@
                     <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
                 </li>
                 <li class="nav-item"> 
-                    <a class="nav-link link text-warning display-4" href="categories"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Categories</a>
+                    <a class="nav-link link text-warning display-4" href="products"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li>
-            </ul>
-            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" data-target="#modalLogin" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Log In</a>
+
+           </ul>
+
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalLogin" href="{{ route('login') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Log In</a>
             </div>
-        </div>
+
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalSignup" href="{{ route('register') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign Up</a>
+            </div>
     </nav>
 </section>
 
@@ -281,7 +299,7 @@
                 <h5 class="pb-3">
                     Address
                 </h5>
-                <p class="mbr-text">Ssanagaun, Siddipur &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>Lalitpur</p>
+                <p class="mbr-text">Sanagaun, Siddipur &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>Lalitpur</p>
             </div>
             <div class="col-12 col-md-3 mbr-fonts-style display-7">
                 <h5 class="pb-3">
@@ -363,8 +381,10 @@
   <script src="{{ url('assets/vimeoplayer/jquery.mb.vimeo_player.js') }}"></script>
   <script src="{{ url('assets/theme/js/script.js') }}"></script>
   <script src="{{ url('assets/slidervideo/script.js') }}"></script>
-  
-  <div class="modal fade " id="modalLogin">
+
+
+
+  <div class="modal fade " id="modalLogin" role="dialog">
   <div class="modal-dialog modal-dialog-center modal-sm">
     <div class="modal-content ">
      <div class="modal-header">
@@ -372,12 +392,18 @@
       <button type="button" class="close" data-dismiss="modal">&times;</button>
      </div>
         <div class="modal-body">
-          <form method="post">
+          <form method="post" action="{{ route('login') }}">
+            @csrf
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user-alt"></i> </span>
               </div>
-              <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+              <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="Username" required autofocus>
+              @if ($errors->has('username'))
+                                    <span class="invalid-feedback" id="errorUsername" role="alert">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
             <div class="input-group">
@@ -387,14 +413,14 @@
               <input type="password" name="password" class="form-control" placeholder="Password" required>
             </div>
         </div>
-
-        <button class="btn btn-primary btn-sm" name="btnLogin" type="submit">LOGIN</button>
-        <a class="text-center text-primary mt-2" id="linkSignup" data-target="#modalSignup" data-toggle="modal">Create a new account</a>
+        <button class="btn btn-primary btn-sm" id="loginBtn" name="btnLogin" type="submit">LOGIN</button>
+        <a class="text-center text-primary display-4" id="linkSignup" data-target="#modalSignup" data-toggle="modal">Create a new account</a>
         </form>
         <br>
     </div>
   </div>
 </div>
+
 
 <script>
 $(document).ready(function(){
@@ -410,6 +436,17 @@ $(document).ready(function(){
   });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+  $('#loginbtn').click(function(){
+    $("#errorUsername").html("You Clicked on Click here Button");
+      $('#modalLogin').modal("show");
+    });
+  });
+</script>
+
+
+
 <div class="modal fade" id="modalSignup">
   <div class="modal-dialog modal-dialog-center modal-md">
     <div class="modal-content">
@@ -419,88 +456,154 @@ $(document).ready(function(){
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body" id="scrollSignup">
-          <form method="post">
+          <form method="post" action="{{ route('register') }}"> @csrf
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
               </div>
-              <input type="text" id="inputFullname" name="fullname" class="form-control" placeholder="Full Name" required>
+              <input type="text" id="inputFirstName" class="form-control{{ $errors->has('firstName') ? ' is-invalid' : '' }}" value="{{ old('firstName') }}" name="firstName" placeholder="First Name" required autofocus>
+              @if ($errors->has('firstName'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('firstName') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+              </div>
+              <input type="text" id="inputLastName" name="lastName" class="form-control{{ $errors->has('lastName') ? ' is-invalid' : '' }}" value="{{ old('lastName') }}" placeholder="Last Name" required>
+              @if ($errors->has('lastName'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('lastName') }}</strong>
+                                    </span>
+                                @endif
+            </div>
+            <br>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+              </div>
+              <input type="text" id="inputAddress" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{ old('address') }}" placeholder="Address" required>
+
+                                @if ($errors->has('address'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+            </div>
+            <br>
+
             <div class="form-group row">
               <label class="col-sm-2 font-weight-bold text-secondary">Gender: </label>
               <div class="col-sm-10">
                   <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optMale" value="Male">
+                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optMale" value="Male" checked>
                       <label class="form-check-label" for="optMale">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optFemale" value="Female">
+                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optFemale" value="Female">
                       <label class="form-check-label" for="optFemale">Female</label>
                   </div>
                   <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optOthers" value="Others">
+                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optOthers" value="Others">
                       <label class="form-check-label" for="optOthers">Others</label>
                   </div>
+
+                  @if ($errors->has('gender'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
               </div>
             </div>
 
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
+                <span class="input-group-text"><i class="fas fa-phone"></i> </span>
               </div>
-              <input type="text" id="inputAddress" name="postalAddress" class="form-control" placeholder="Postal Address" required>
+              <input type="number" id="inputContactNo" min="9800000000" max="9899999999" name="contactNo" class="form-control{{ $errors->has('contactNo') ? ' is-invalid' : '' }}" value="{{ old('contactNo') }}" placeholder="Contact No." required>
+              @if ($errors->has('contactNo'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('contactNo') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marked-alt"></i> </span>
-              </div>
-              <input type="text" id="inputPostalCode" name="postalCode" class="form-control" placeholder="Postal Code" required>
-            </div>
-            <br>
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="far fa-calendar-alt"></i> </span>
               </div>
-              <input type="date" id="inputDob" name="dob" class="form-control"  required>
+              <input type="date" id="inputDob" name="dateOfBirth" class="form-control{{ $errors->has('dateOfBirth') ? ' is-invalid' : '' }}" value="{{ old('dateOfBirth') }}"  required>
+              @if ($errors->has('dateOfBirth'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('dateOfBirth') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="far fa-envelope"></i></span>
               </div>
-              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required>
+              <input type="email" id="inputEmail" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Email" required>
+              @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-user-alt"></i> </span>
               </div>
-              <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required>
+              <input type="text" id="inputUsername" name="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" value="{{ old('username') }}" placeholder="Username" required>
+              @if ($errors->has('username'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i> </span>
               </div>
-              <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+              <input type="password" id="inputPassword" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password" required>
+              @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
             </div>
             <br>
+
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-key"></i> </span>
               </div>
-              <input type="password" id="inputRetype" name="retype" class="form-control" placeholder="Re-type Password" required>
+              <input type="password" id="inputRetype" name="password_confirmation" class="form-control" placeholder="Re-type Password" required>
             </div>
+
+
+
             <br>
             <button class="btn btn-primary btn-lg mx-3" name="btnSignup" type="submit">Sign Up</button>
+            
             <a class="text-center text-primary mt-2" id="linkLogin" data-target="#modalLogin" data-toggle="modal">I already have an account</a>
           </form>
         </div>
     </div>
   </div>
 </div>
-  
+
 </body>
 </html>

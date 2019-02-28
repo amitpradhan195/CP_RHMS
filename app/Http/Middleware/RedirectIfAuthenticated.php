@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            session()->flash('logoutAnother', 'Another account has not been logged out!!');
+            return redirect('/userDash');
         }
 
         return $next($request);

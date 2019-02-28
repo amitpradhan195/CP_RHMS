@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/index', function (){
@@ -21,20 +21,37 @@ Route::get('/index', function (){
 
 Route::get('/bookings', function (){
 	return view('booking');
-});
+})->middleware('auth');
 
 Route::get('/gallery', function (){
 	return view('gallery');
-});
+})->middleware('auth');
 
-Route::get('/categories', function (){
-	return view('categories');
-});
+Route::get('/products', function (){
+	return view('products');
+})->middleware('auth');
 
 Route::get('/aboutUs', function(){
 	return view('aboutUs');
-});
+})->middleware('auth');
 
 Route::get('/billing', function (){
 	return view('billing');
-});
+})->middleware('auth');
+
+Route::get('/userDash', function (){
+	return view('userDash');
+})->middleware('auth');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/editProfile', function (){
+	return view('editProfile');
+})->middleware('auth');
+
+// Route::get('/editProf/{id}', 'editProfile@store')->name('');
+
+Route::get('/editProfile/{id}', 'editProf@edit');
+Route::put('/updateProfile/{id}', 'editProf@update');

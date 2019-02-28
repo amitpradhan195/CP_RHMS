@@ -13,3 +13,18 @@
 {
 	margin-bottom: -100px;
 }
+
+#btnSignup
+{
+	size: 10px;
+}
+
+#formEditProf
+{
+	margin-left: 200px;
+}
+
+#editProfBody
+{
+	background-color:#FBFCFC;
+}

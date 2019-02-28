@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/motorbikelogo-96x96.png" type="image/x-icon">
   <meta name="description" content="Website Generator Description">
-  <title>Categories</title>
+  <title>Products</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}" />
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}" />
   <link rel="stylesheet" href="{{url('assets/tether/tether.min.css') }}" />
@@ -45,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="index"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
+                    <a class="nav-link link text-warning display-4" href="userDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="gallery"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Gallery</a>
@@ -54,13 +54,27 @@
                     <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
                 </li>
                 <li class="nav-item"> 
-                    <a class="nav-link link text-warning display-4" href="categories"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Categories</a>
+                    <a class="nav-link link text-warning display-4" href="products"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
+                </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+                <li class="nav-item">
+                    <a class="link display-5" href="{{url('editProfile') }}" style="color: #d2cf09 "> {{ Auth::user()->username }} </a>
                 </li>
+
             </ul>
-            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" data-target="#modalLogin" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Log In</a>
+
+            <div class="navbar-buttons mbr-section-btn">
+                <a class="btn btn-sm btn-primary-outline display-4" href="{{ route('logout') }}" 
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><span class="mbrib-logout mbr-iconfont mbr-iconfont-btn"></span>
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
             </div>
         </div>
     </nav>

@@ -14,8 +14,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('tbl_users', function (Blueprint $table) {
-            $table->string('username',60)->primary();
-            $table->string('password',25);
+            $table->increments('id');
+            $table->string('username',60)->unique();
+            $table->string('password');
             $table->string('firstName');
             $table->string('lastName');
             $table->enum('Gender',['Male', 'Female', 'Others']);
@@ -23,8 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('contactNo');
             $table->string('email',60)->unique();
             $table->date('dateOfBirth');
-            $table->unsignedInteger('userType_Id');
-            $table->foreign('userType_Id')->references('userTypeId')->on('tbl_userType');
+            $table->unsignedInteger('userTypeId');
+            $table->foreign('userTypeId')->references('userTypeId')->on('tbl_userType');
 
             $table->rememberToken();
             $table->timestamps();

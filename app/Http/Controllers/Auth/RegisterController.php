@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/userDash';
 
     /**
      * Create a new controller instance.
@@ -49,8 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:60','unique:tbl_users'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'contactNo' => ['required', 'string'],
+            'dateOfBirth' => ['required', 'date'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:tbl_users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -63,10 +69,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        session()->flash('successRegister', 'Congratulation! You are registered successfully');
         return User::create([
-            'name' => $data['name'],
+            'firstName' => $data['firstName'],
+            'lastName' => $data['lastName'],
+            'Gender' => $data['sex'],
+            'address' => $data['address'],
+            'contactNo' => $data['contactNo'],
+            'dateOfBirth' => $data['dateOfBirth'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
+            'userTypeId' => 2,
         ]);
     }
 }
