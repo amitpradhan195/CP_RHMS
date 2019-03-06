@@ -64,23 +64,30 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
-                <li class="nav-item">
-                    <a class="link display-5" style="color: #d2cf09 "></a>
-                </li>
-
             </ul>
 
-            <div class="navbar-buttons mbr-section-btn">
-                <a class="btn btn-sm btn-primary-outline display-4" href="{{ route('logout') }}" 
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="mbrib-logout mbr-iconfont mbr-iconfont-btn"></span>
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-            </div>
+            <div class="btn-group">
+             <span class="mbrib-user mbr-iconfont mbr-iconfont-btn display-5"></span>&nbsp
+             <a class="display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
+             </a>
+             <ul class="dropdown-menu">
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{url('editProfile')}}">EditProfile
+                          </a>
+                    </li>
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{ route('logout') }}" 
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                    </li>
+             </ul>                 
+            </div> 
+          </div>
     </nav>
 </section>
 
@@ -247,6 +254,19 @@
         alert(msg);
       }
 </script>
+
+ <script src="{{url('assets/web/assets/jquery/jquery.min.js') }}"></script>
+  <script src="{{url('assets/popper/popper.min.js') }}"></script>
+  <script src="{{url('assets/tether/tether.min.js') }}"></script>
+  <script src="{{url('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{url('assets/dropdown/js/script.min.js') }}"></script>
+  <script src="{{url('assets/touchswipe/jquery.touch-swipe.min.js') }}"></script>
+  <script src="{{url('assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js') }}"></script>
+  <script src="{{url('assets/smoothscroll/smooth-scroll.js') }}"></script>
+  <script src="{{url('assets/vimeoplayer/jquery.mb.vimeo_player.js') }}"></script>
+  <script src="{{url('assets/masonry/masonry.pkgd.min.js') }}"></script>
+  <script src="{{url('assets/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="{{url('assets/theme/js/script.js') }}"></script>
 
 </body>
 </html>

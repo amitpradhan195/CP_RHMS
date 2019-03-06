@@ -19,6 +19,14 @@ Route::get('/index', function (){
 	return view('index');
 });
 
+Route::get('/adminDash', function (){
+	return view('adminDash');
+})->middleware('auth');
+
+Route::get('/userDash', function (){
+	return view('userDash');
+})->middleware('auth');
+
 Route::get('/bookings', function (){
 	return view('booking');
 })->middleware('auth');
@@ -39,13 +47,13 @@ Route::get('/billing', function (){
 	return view('billing');
 })->middleware('auth');
 
-Route::get('/userDash', function (){
-	return view('userDash');
+Route::get('/addItem', function (){
+	return view('addItem');
 })->middleware('auth');
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/editProfile', function (){
 	return view('editProfile');
@@ -54,4 +62,9 @@ Route::get('/editProfile', function (){
 // Route::get('/editProf/{id}', 'editProfile@store')->name('');
 
 Route::get('/editProfile/{id}', 'editProf@edit');
+// Route::put('/updateProfile/{id}', 'editProf@store');
 Route::put('/updateProfile/{id}', 'editProf@update');
+
+Route::put('/addedItem', 'AddItemController@create');
+
+Route::get('/products', 'AddItemController@show');

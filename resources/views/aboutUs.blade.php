@@ -10,6 +10,7 @@
   <title>About Us</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}" />
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}" />
+  <link rel="stylesheet" href="{{url('assets/web/assets/icons-bold/mobirise-icons-bold.css') }}">
   <link rel="stylesheet" href="{{url('assets/tether/tether.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap-grid.min.css') }}" />
@@ -61,23 +62,29 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              </ul>
 
-                <li class="nav-item">
-                    <a class="link display-5" href="{{url('editProfile') }}" style="color: #d2cf09 "> {{ Auth::user()->username }} </a>
-                </li>
-
-            </ul>
-
-            <div class="navbar-buttons mbr-section-btn">
-                <a class="btn btn-sm btn-primary-outline display-4" href="{{ route('logout') }}" 
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="mbrib-logout mbr-iconfont mbr-iconfont-btn"></span>
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-            </div>
+            <div class="btn-group">
+             <span class="mbrib-user mbr-iconfont mbr-iconfont-btn display-5"></span>&nbsp
+             <a class="display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
+             </a>
+             <ul class="dropdown-menu">
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{url('editProfile')}}">EditProfile
+                          </a>
+                    </li>
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{ route('logout') }}" 
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                    </li>
+             </ul>                 
+            </div> 
           </div>
     </nav>
 </section>

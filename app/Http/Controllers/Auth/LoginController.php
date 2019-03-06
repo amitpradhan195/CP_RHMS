@@ -27,7 +27,6 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/userDash';
-    // protected $lastAttempted;
 
 
     /**
@@ -44,7 +43,7 @@ class LoginController extends Controller
     {
         switch (Auth::user()->userTypeId) {
             case '1':
-                return '/aboutUs';
+                return '/adminDash';
                 break;
             
             default:

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Auth;
+use Carbon;
 
 class editProf extends Controller
 {
@@ -38,7 +39,24 @@ class editProf extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate incoming request
+        
+        $today = Carbon::now()->toDateTimeString();
+        $validator = Validator::make($request->all(), [
+             'username' => ['required', 'string', 'max:60','unique:tbl_users'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'contactNo' => ['required', 'string'],
+            'dateOfBirth' => ['required','date_format:Y-m-d','before:'.$today],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:tbl_users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+       ]);
+        
+       if ($validator->fails()) {
+            Session::flash('error', $validator->messages()->first());
+            return redirect()->back()->withInput();
+       } 
     }
 
     /**

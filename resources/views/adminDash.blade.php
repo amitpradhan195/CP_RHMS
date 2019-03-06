@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/motorbikelogo-96x96.png" type="image/x-icon">
   <meta name="description" content="Web Page Builder Description">
-  <title>userDash</title>
+  <title>adminDash</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}">
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}">
   <link rel="stylesheet" href="{{url('assets/web/assets/icons-bold/mobirise-icons-bold.css') }}">
@@ -67,9 +67,9 @@
                     <a class="nav-link link text-warning display-4" href="userDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="gallery"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Gallery</a>
+                    <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
                 </li>
                 <li class="nav-item"> 
@@ -77,7 +77,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
-                </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                </li> --> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
             </ul>
 
             <div class="btn-group">
@@ -116,7 +116,20 @@
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-2"><span style="font-weight: normal;">Hello {{ Auth::user()->firstName }}</span></h1>
                 
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">We are glad to see you here. Hope you will enjoy the services.&nbsp;</p>
-                <div class="mbr-section-btn"><a class="btn btn-md btn-primary-outline display-4" href="https://mobirise.co">Start Shop<br></a> <a class="btn btn-md btn-primary-outline display-4" href="https://mobirise.co">Go to Cart<br></a></div>
+                <div class="mbr-section-btn">
+                    <a class="btn btn-md btn-primary-outline display-4" href="/addItem">Add Items<br>
+                    </a> 
+                    <a class="btn btn-md btn-primary-outline display-4" href="#">Update Items<br>
+                    </a>
+                    <a class="btn btn-md btn-primary-outline display-4" href="#">Delete Items<br>
+                    </a>
+                    <a class="btn btn-md btn-primary-outline display-4" href="#">View Items<br>
+                    </a>
+                    <a class="btn btn-md btn-primary-outline display-4" href="#">View Bookings<br>
+                    </a>
+                    <a class="btn btn-md btn-primary-outline display-4" href="#">View Customers<br>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -125,7 +138,7 @@
 
 
 
-<section class="header12 cid-riSEXIrcit mbr-fullscreen mbr-parallax-background" id="header12-2i">
+<!-- <section class="header12 cid-riSEXIrcit mbr-fullscreen mbr-parallax-background" id="header12-2i">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(35, 35, 35);">
     </div>
@@ -186,49 +199,7 @@
             <i class="mbri-down mbr-iconfont"></i>
         </a>
     </div>
-</section>
-
-<section class="features9 cid-riTbvH8ysH" id="features9-2n">
-
-    
-
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card p-3 col-12 col-md-6">
-                <div class="media-container-row">
-                    <div class="card-img pr-2">
-                        <span class="mbri-features mbr-iconfont"></span>
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title py-3 mbr-fonts-style display-7">
-                            No Coding
-                        </h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                           Mobirise is an easy website builder - just drop site elements to your page, add content and style it to look the way you like.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6">
-                <div class="media-container-row">
-                    <div class="card-img pr-2">
-                        <span class="mbri-star mbr-iconfont"></span>
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title py-3 mbr-fonts-style display-7">
-                            Mobile Friendly
-                        </h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                           All sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site.
-                        </p>
-                    </div>
-                </div>
-            </div>            
-        </div>
-    </div>
-</section>
+</section> -->
 
 
 

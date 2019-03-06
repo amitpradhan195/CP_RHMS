@@ -9,6 +9,7 @@
   <title>Products</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}" />
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}" />
+  <link rel="stylesheet" href="{{url('assets/web/assets/icons-bold/mobirise-icons-bold.css') }}">
   <link rel="stylesheet" href="{{url('assets/tether/tether.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap-grid.min.css') }}" />
@@ -59,23 +60,29 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-
-                <li class="nav-item">
-                    <a class="link display-5" href="{{url('editProfile') }}" style="color: #d2cf09 "> {{ Auth::user()->username }} </a>
-                </li>
-
             </ul>
 
-            <div class="navbar-buttons mbr-section-btn">
-                <a class="btn btn-sm btn-primary-outline display-4" href="{{ route('logout') }}" 
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="mbrib-logout mbr-iconfont mbr-iconfont-btn"></span>
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-            </div>
+            <div class="btn-group">
+             <span class="mbrib-user mbr-iconfont mbr-iconfont-btn display-5"></span>&nbsp
+             <a class="display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
+             </a>
+             <ul class="dropdown-menu">
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{url('editProfile')}}">EditProfile
+                          </a>
+                    </li>
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{ route('logout') }}" 
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                    </li>
+             </ul>                 
+            </div> 
         </div>
     </nav>
 </section>
@@ -84,7 +91,7 @@
     <div class="container" id="categoriesContainer">
         <div class="row justify-content-center">
             <div class="title col-12 col-lg-8">
-                <h2 class="align-center pb-2 mbr-fonts-style display-2">All types of Categories</h2>
+                <h2 class="align-center pb-2 mbr-fonts-style display-2">All types of MotorCycles</h2>
                 <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">Search for your choice<br></h3>
             </div>
         </div>
@@ -93,7 +100,33 @@
             <div class="col-12 col-lg-6  col-md-8 " data-form-type="formoid">
                 <form class="mbr-form" action="" method="post" data-form-title="Search Form">
                     <div class="mbr-subscribe input-group">
-                        <input class="form-control" id="txt" type="text" name="searchBy" placeholder="Search">
+                        <!-- <div class="btn-group">
+             <a class="btn btn-text-warning-outline display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">All</a>
+
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">ALL</a>
+                                </li>
+                                <li>
+                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="">Sports</a>
+                                </li>
+                                <li>
+                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">Dirt</a>
+                                </li>
+                                <li>
+                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">Cruiser</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                            <div class="col-md-4">
+                              <select class="form-control">
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="all">All</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="dirt">Dirt</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="sport">Sport</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="cruiser">Cruiser</option>
+                              </select>
+                            </div>
+                        <input class="form-control col-lg-4" id="txt" type="text" name="searchBy" placeholder="Search">
                         <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary display-4">Search</button></span>
                     </div>
                 </form>
@@ -102,62 +135,112 @@
     </div>
 </section>
 
-<section class="features3 cid-rggjwDkp7Y" id="features3-1e">
+<section class="mt-4" style="background-color: white;">
     <div class="container">
-        <div class="media-container-row">
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/mbr-676x443.jpg" alt="streetBikeImg" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Street Motorcycles</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Mobirise is an easy website builder - just drop site elements to your page, add content and style it to look the way you like.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center"><a href="" class="btn btn-primary display-4">
-                            Street</a></div>
-                </div>
-            </div>
+        <div class="d-flex flex-wrap">
 
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/mbr-676x451.jpg" alt="dirtBikeImg" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">
-                            Dirt Motorcycles</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            All sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center"><a href="" class="btn btn-primary display-4">
-                            Dirt</a></div>
-                </div>
-            </div>
+            @foreach ($itemDetails as $data) 
+                <div class="card p-2 m-2  border" style="width: 260px;">
+                    <div class="card-wrapper">
+                        <div class="card-img">
+                            <img src="/{{ $data->img }}" style="height: 200px; width: 100%;"  alt="streetBikeImg" title="">
+                        </div>
+                        <div class="card-box">
+                            <h6 class="card-title" style="font-family: ">
+                            <label class=" text-warning display-4"> Model Name:  
+                            </label>
+                            {{ $data->modelName }}
+                            </h6>
 
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/mbr-1-676x451.jpg" alt="sportBikeImg" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">&nbsp;Sport Motorcycles</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Mobirise offers many site blocks in several themes, and though these blocks are pre-made, they are flexible.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center"><a href="https://mobirise.co" class="btn btn-primary display-4">
-                            Sport</a></div>
-                </div>
-            </div>
+                            <h6 class="card-title mbr-fonts-style">
+                            <label class=" text-warning display-4"> Brand:  
+                            </label>
+                            {{ $data->brand }}
+                            </h6>
 
-            
-        </div>
+                            <h6 class="card-title mbr-fonts-style">
+                            <label class=" text-warning display-4"> Item Type:  
+                            </label>
+                            {{ $data->itemType }}
+                            </h6>
+
+                            <h6 class="card-title mbr-fonts-style">
+                            <label class=" text-warning display-4"> Model Year:  
+                            </label>
+                            {{ $data->modelYear }}
+                            </h6>
+
+                            <!-- Show More From Here -->
+
+                            <a data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View More</a>
+
+                            <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> CC:  
+                                </label>
+                                {{ $data->cc }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Cylinder:  
+                                </label>
+                                {{ $data->cylinder }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> No of Gears:  
+                                </label>
+                                {{ $data->noOfGears }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Mileage:  
+                                </label>
+                                {{ $data->mileage }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Front Brake:  
+                                </label>
+                                {{ $data->frontBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Rear Brake:  
+                                </label>
+                                {{ $data->rearBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Fuel Type:  
+                                </label>
+                                {{ $data->fuelType }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> ABS:  
+                                </label>
+                                {{ $data->ABS }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Description:  
+                                </label>
+                                {{ $data->description }}
+                                </h6>
+                            </div>
+                            
+                        </div>
+                        <div class="mbr-section-btn text-center">
+                            <a href="" class="btn btn-primary display-4">
+                                NRs. {{$data->price}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
     </div>
+</div>
 </section>
 
 <section class="services1 cid-rggNzMJlwj" id="services1-1h">
@@ -329,143 +412,6 @@
   <script src="{{url ('assets/theme/js/script.js') }}"></script>
   <script src="{{url ('assets/formoid/formoid.min.js') }}"></script>
   
-  <div class="modal fade " id="modalLogin">
-  <div class="modal-dialog modal-dialog-center modal-sm">
-    <div class="modal-content ">
-     <div class="modal-header">
-      <h3 class="text-info " id="titleLogin"> LOGIN </h3>
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-     </div>
-        <div class="modal-body">
-          <form method="post">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user-alt"></i> </span>
-              </div>
-              <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i> </span>
-              </div>
-              <input type="password" name="password" class="form-control" placeholder="Password" required>
-            </div>
-        </div>
-
-        <button class="btn btn-primary btn-sm" name="btnLogin" type="submit">LOGIN</button>
-        <a class="text-center text-primary mt-2" id="linkSignup" data-target="#modalSignup" data-toggle="modal">Create a new account</a>
-        </form>
-        <br>
-    </div>
-  </div>
-</div>
-
-<script>
-$(document).ready(function(){
-    $("#linkSignup").click(function(){
-        $("#modalLogin").modal("hide");
-        $("#modalSignup").modal("show");
-    });
-
-     $("#linkLogin").click(function(){
-      $("#modalSignup").modal("hide");
-      $("#modalLogin").modal("show");
-    });
-  });
-</script>
-
-<div class="modal fade" id="modalSignup">
-  <div class="modal-dialog modal-dialog-center modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="text-center text-danger" id="titleSignup"> SignUp </h1>
-        <img src="addUser.png" alt="Logo" style="width:60px;">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body" id="scrollSignup">
-          <form method="post">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
-              </div>
-              <input type="text" id="inputFullname" name="fullname" class="form-control" placeholder="Full Name" required>
-            </div>
-            <br>
-            <div class="form-group row">
-              <label class="col-sm-2 font-weight-bold text-secondary">Gender: </label>
-              <div class="col-sm-10">
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optMale" value="Male">
-                      <label class="form-check-label" for="optMale">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optFemale" value="Female">
-                      <label class="form-check-label" for="optFemale">Female</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optOthers" value="Others">
-                      <label class="form-check-label" for="optOthers">Others</label>
-                  </div>
-              </div>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
-              </div>
-              <input type="text" id="inputAddress" name="postalAddress" class="form-control" placeholder="Postal Address" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marked-alt"></i> </span>
-              </div>
-              <input type="text" id="inputPostalCode" name="postalCode" class="form-control" placeholder="Postal Code" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="far fa-calendar-alt"></i> </span>
-              </div>
-              <input type="date" id="inputDob" name="dob" class="form-control"  required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-              </div>
-              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user-alt"></i> </span>
-              </div>
-              <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i> </span>
-              </div>
-              <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i> </span>
-              </div>
-              <input type="password" id="inputRetype" name="retype" class="form-control" placeholder="Re-type Password" required>
-            </div>
-            <br>
-            <button class="btn btn-primary btn-lg mx-3" name="btnSignup" type="submit">Sign Up</button>
-            <a class="text-center text-primary mt-2" id="linkLogin" data-target="#modalLogin" data-toggle="modal">I already have an account</a>
-          </form>
-        </div>
-    </div>
-  </div>
-</div>
   
 </body>
 </html>
