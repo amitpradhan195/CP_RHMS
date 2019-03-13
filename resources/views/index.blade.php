@@ -80,6 +80,7 @@
 
             <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalSignup" href="{{ route('register') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign Up</a>
             </div>
+        </div>
     </nav>
 </section>
 

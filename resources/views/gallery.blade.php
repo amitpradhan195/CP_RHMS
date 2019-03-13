@@ -47,7 +47,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="userDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
+                    <a class="nav-link link text-warning display-4" href="index"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="gallery"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Gallery</a>
@@ -60,29 +60,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
-                </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            </ul>
+                </li>
 
-            <div class="btn-group">
-             <span class="mbrib-user mbr-iconfont mbr-iconfont-btn display-5"></span>&nbsp
-             <a class="display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
-             </a>
-             <ul class="dropdown-menu">
-                    <li>
-                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{url('editProfile')}}">EditProfile
-                          </a>
-                    </li>
-                    <li>
-                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{ route('logout') }}" 
-                                               onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                    </li>
-             </ul>                 
+           </ul>
+
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalLogin" href="{{ route('login') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Log In</a>
+            </div>
+
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalSignup" href="{{ route('register') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Sign Up</a>
             </div>
         </div>
     </nav>
@@ -90,7 +75,161 @@
 
 <section class="mbr-gallery mbr-slider-carousel cid-rggbHQxIrq" id="gallery2-12">
     <div class="container">
-        <div><!-- Filter --><div class="mbr-gallery-filter container gallery-filter-active"><ul buttons="0"><li class="mbr-gallery-filter-all"><a class="btn btn-md btn-primary-outline active display-7" href="">All</a></li></ul></div><!-- Gallery --><div class="mbr-gallery-row"><div class="mbr-gallery-layout-default"><div><div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="0" data-toggle="modal"><img src="assets/images/mbr-1920x1361-800x567.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive"><div href="#lb-gallery2-12" data-slide-to="1" data-toggle="modal"><img src="assets/images/mbr-1920x1280-800x533.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-12" data-slide-to="2" data-toggle="modal"><img src="assets/images/mbr-1920x1311-800x546.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="3" data-toggle="modal"><img src="assets/images/mbr-1920x1280-800x533.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="4" data-toggle="modal"><img src="assets/images/mbr-492x328-492x328.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive"><div href="#lb-gallery2-12" data-slide-to="5" data-toggle="modal"><img src="assets/images/mbr-676x451-676x451.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Animated"><div href="#lb-gallery2-12" data-slide-to="6" data-toggle="modal"><img src="assets/images/suzukidt-700x524-700x524.jpg" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="7" data-toggle="modal"><img src="assets/images/yamahafz-305x165-305x165.jpg" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="8" data-toggle="modal"><img src="assets/images/mbr-1-1920x1280-800x533.jpg" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="9" data-toggle="modal"><img src="assets/images/mbr-1920x1281-800x534.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="10" data-toggle="modal"><img src="assets/images/mbr-1920x1101-800x459.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-12" data-slide-to="11" data-toggle="modal"><img src="assets/images/mbr-1920x1307-800x545.jpg" alt="bikeImg" title=""><span class="icon-focus"></span></div></div></div></div><div class="clearfix"></div></div></div><!-- Lightbox --><div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-12"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="carousel-inner"><div class="carousel-item"><img src="assets/images/mbr-1920x1361.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1920x1280.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1920x1311.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1920x1280.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-492x328.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-676x451.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/suzukidt-700x524.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/yamahafz-305x165.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1-1920x1280.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1920x1281.jpg" alt="bikeImg" title=""></div><div class="carousel-item active"><img src="assets/images/mbr-1920x1101.jpg" alt="bikeImg" title=""></div><div class="carousel-item"><img src="assets/images/mbr-1920x1307.jpg" alt="bikeImg" title=""></div></div><a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery2-12"><span class="mbri-left mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery2-12"><span class="mbri-right mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Next</span></a><a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a></div></div></div></div></div>
+        <div>
+          <!-- Filter -->
+          <div class="mbr-gallery-filter container gallery-filter-active">
+            <ul buttons="0">
+              <li class="mbr-gallery-filter-all">
+                <a class="btn btn-md btn-primary-outline active display-7" href="">All</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Gallery -->
+          <div class="mbr-gallery-row">
+            <div class="mbr-gallery-layout-default">
+              <div>
+                <div>
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="0" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1361-800x567.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive">
+                    <div href="#lb-gallery2-12" data-slide-to="1" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1280-800x533.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Creative">
+                    <div href="#lb-gallery2-12" data-slide-to="2" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1311-800x546.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="3" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1280-800x533.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="4" data-toggle="modal">
+                      <img src="assets/images/mbr-492x328-492x328.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive">
+                    <div href="#lb-gallery2-12" data-slide-to="5" data-toggle="modal">
+                      <img src="assets/images/mbr-676x451-676x451.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Animated">
+                    <div href="#lb-gallery2-12" data-slide-to="6" data-toggle="modal">
+                      <img src="assets/images/suzukidt-700x524-700x524.jpg" alt="" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="7" data-toggle="modal">
+                      <img src="assets/images/yamahafz-305x165-305x165.jpg" alt="" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="8" data-toggle="modal">
+                      <img src="assets/images/mbr-1-1920x1280-800x533.jpg" alt="" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="9" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1281-800x534.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="10" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1101-800x459.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+
+                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
+                    <div href="#lb-gallery2-12" data-slide-to="11" data-toggle="modal">
+                      <img src="assets/images/mbr-1920x1307-800x545.jpg" alt="bikeImg" title="">
+                      <span class="icon-focus"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <!-- Lightbox -->
+          <div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-12">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="carousel-inner">
+                    <div class="carousel-item">
+                      <img src="assets/images/mbr-1920x1361.jpg" alt="bikeImg" title=""></div>
+
+                      <div class="carousel-item">
+                        <img src="assets/images/mbr-1920x1280.jpg" alt="bikeImg" title=""></div>
+                        <div class="carousel-item">
+                          <img src="assets/images/mbr-1920x1311.jpg" alt="bikeImg" title=""></div>
+                          <div class="carousel-item">
+                            <img src="assets/images/mbr-1920x1280.jpg" alt="bikeImg" title=""></div>
+                            <div class="carousel-item">
+                              <img src="assets/images/mbr-492x328.jpg" alt="bikeImg" title=""></div>
+                              <div class="carousel-item">
+                                <img src="assets/images/mbr-676x451.jpg" alt="bikeImg" title=""></div>
+                                <div class="carousel-item">
+                                  <img src="assets/images/suzukidt-700x524.jpg" alt="bikeImg" title=""></div>
+                                  <div class="carousel-item">
+                                    <img src="assets/images/yamahafz-305x165.jpg" alt="bikeImg" title=""></div>
+                                    <div class="carousel-item">
+                                      <img src="assets/images/mbr-1-1920x1280.jpg" alt="bikeImg" title=""></div>
+                                      <div class="carousel-item">
+                                        <img src="assets/images/mbr-1920x1281.jpg" alt="bikeImg" title=""></div>
+                                        <div class="carousel-item active">
+                                          <img src="assets/images/mbr-1920x1101.jpg" alt="bikeImg" title=""></div>
+                                          <div class="carousel-item">
+                                            <img src="assets/images/mbr-1920x1307.jpg" alt="bikeImg" title="">
+                                          </div>
+                                        </div>
+
+                                        <a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery2-12">
+                                          <span class="mbri-left mbr-iconfont" aria-hidden="true"></span>
+                                          <span class="sr-only">Previous</span>
+                                        </a>
+
+                                        <a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery2-12">
+                                          <span class="mbri-right mbr-iconfont" aria-hidden="true"></span>
+                                          <span class="sr-only">Next</span>
+                                        </a>
+
+                                        <a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
     </div>
 </section>
 

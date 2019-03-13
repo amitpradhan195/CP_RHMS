@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             session()->flash('loginFirst', 'Please! You have to login first');
-            return ('index');
+            return ('/index');
         }
     }
 }

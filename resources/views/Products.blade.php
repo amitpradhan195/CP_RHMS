@@ -87,6 +87,15 @@
     </nav>
 </section>
 
+<script>
+      var msg = '{{Session::get('bookingSuccess')}}';
+      var exist = '{{Session::has('bookingSuccess')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+    </script>
+
 <section class="mbr-section form3 cid-rggij9RQ25" id="form3-1c">
     <div class="container" id="categoriesContainer">
         <div class="row justify-content-center">
@@ -100,24 +109,6 @@
             <div class="col-12 col-lg-6  col-md-8 " data-form-type="formoid">
                 <form class="mbr-form" action="" method="post" data-form-title="Search Form">
                     <div class="mbr-subscribe input-group">
-                        <!-- <div class="btn-group">
-             <a class="btn btn-text-warning-outline display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">All</a>
-
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">ALL</a>
-                                </li>
-                                <li>
-                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="">Sports</a>
-                                </li>
-                                <li>
-                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">Dirt</a>
-                                </li>
-                                <li>
-                                    <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="#">Cruiser</a>
-                                </li>
-                            </ul>
-                        </div> -->
                             <div class="col-md-4">
                               <select class="form-control">
                                 <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="all">All</option>
@@ -135,24 +126,32 @@
     </div>
 </section>
 
-<section class="mt-4" style="background-color: white;">
+<section class="services1 cid-rggNzMJlwj" id="services1-1h">
+
+    <!--Overlay-->
+    
+    <!--Container-->
     <div class="container">
-        <div class="d-flex flex-wrap">
-
+        <div class="row justify-content-center">
+            <!--Titles-->
+            <div class="title pb-5 col-12">
+                <h2 class="align-left pb-3 mbr-fonts-style display-1">
+                    Our Shop
+                </h2>
+                
+            </div>
+            <!--Card-1-->
             @foreach ($itemDetails as $data) 
-                <div class="card p-2 m-2  border" style="width: 260px;">
-                    <div class="card-wrapper">
-                        <div class="card-img">
-                            <img src="/{{ $data->img }}" style="height: 200px; width: 100%;"  alt="streetBikeImg" title="">
-                        </div>
-                        <div class="card-box">
-                            <h6 class="card-title" style="font-family: ">
-                            <label class=" text-warning display-4"> Model Name:  
-                            </label>
-                            {{ $data->modelName }}
-                            </h6>
-
-                            <h6 class="card-title mbr-fonts-style">
+            <div class="card col-12 col-md-6 col-lg-4">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <img src="/{{ $data->img }}" alt="bikeImg" title="">
+                    </div>
+                    <div class="card-box pb-md-5">
+                             <h4 class="card-title mbr-fonts-style display-5">{{ $data->modelName }}</h4>
+                        <hr> 
+                        
+                        <h6 class="card-title mbr-fonts-style">
                             <label class=" text-warning display-4"> Brand:  
                             </label>
                             {{ $data->brand }}
@@ -170,11 +169,12 @@
                             {{ $data->modelYear }}
                             </h6>
 
-                            <!-- Show More From Here -->
+                            <!-- View More From Here -->
 
                             <a data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View More</a>
 
                             <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
+                                <br>
                                 <h6 class="card-title mbr-fonts-style">
                                 <label class=" text-warning display-4"> CC:  
                                 </label>
@@ -229,94 +229,51 @@
                                 {{ $data->description }}
                                 </h6>
                             </div>
-                            
+
+                           
+                           <form method="post" id="form_id" action="{{url('/addBooking',$data->itemId)}}">
+                                @csrf
+                                {{method_field('put')}}
+
+                                
+                                <!--Btn-->
+                                <div class="mbr-section-btn align-left">
+                                    <!-- Only for passing current date to the controller -->
+                                <input type="hidden" name="bookingDate" value="<?php date_default_timezone_set("Asia/Kathmandu");echo date('Y-m-d H:i'); ?>" />
+
+                                 <!-- Only for passing item id to the controller -->
+                                <input type="hidden" name="itemId" value="{{$data->itemId}}"/>
+
+                                <!-- Only for passing user id to the controller -->
+                                <input type="hidden" name="userId" value="{{Auth::user()->id}}"/>
+                                    
+                                    <button onclick="confirmBook()" type="submit" name="btnBook" class="btn btn-primary-outline display-4">
+                                        NRs. {{$data->price}}</button>
+                                    </div>
+                                <script type="text/javascript">
+
+                                            
+                                            function confirmBook() {
+                                                if (confirm("Are you sure you want to book this item?")) 
+                                                {
+                                                    document.getElementById("form_id").submit();
+                                                        
+                                                } 
+                                                else 
+                                                {
+                                                    return false;
+                                                }
+                                            }
+                                        </script>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mbr-section-btn text-center">
-                            <a href="" class="btn btn-primary display-4">
-                                NRs. {{$data->price}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
             @endforeach
-    </div>
-</div>
-</section>
-
-<section class="services1 cid-rggNzMJlwj" id="services1-1h">
-
-    <!--Overlay-->
-    
-    <!--Container-->
-    <div class="container">
-        <div class="row justify-content-center">
-            <!--Titles-->
-            <div class="title pb-5 col-12">
-                <h2 class="align-left pb-3 mbr-fonts-style display-1">
-                    Our Shop
-                </h2>
-                
-            </div>
-            <!--Card-1-->
-            <div class="card col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/200ns-287x176.jpg" alt="bikeImg" title="">
-                    </div>
-                    <div class="card-box pb-md-5">
-                        <h4 class="card-title mbr-fonts-style display-5">200 NS-Bajaj</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium dolores doloribus
-                            eligendi eum illo placeat quis repellendus sequi tempore!
-                        </p>
-                        <!--Btn-->
-                        <div class="mbr-section-btn align-left"><a href="" class="btn btn-warning-outline display-4">
-                                Rs 325000</a></div>
-                    </div>
-                </div>
-            </div>
-            <!--Card-2-->
-            <div class="card col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/suzukidt-700x524.jpg" alt="bikeImg" title="">
-                    </div>
-                    <div class="card-box pb-md-5">
-                        <h4 class="card-title mbr-fonts-style display-5">Gixxer DT-Suzuki</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium dolores doloribus
-                            eligendi eum illo placeat quis repellendus sequi tempore!
-                        </p>
-                        <!--Btn-->
-                        <div class="mbr-section-btn align-left"><a href="" class="btn btn-warning-outline display-4">
-                                Rs 270000</a></div>
-                    </div>
-                </div>
-            </div>
-            <!--Card-3-->
-            <div class="card col-12 col-md-6 col-lg-4 last-child">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="assets/images/yamahafz-305x165.jpg" alt="bikeImg" title="">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-5">
-                            FZ V2-Yamaha</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium dolores doloribus
-                            eligendi eum illo placeat quis repellendus sequi tempore!
-                        </p>
-                        <!--Btn-->
-                        <div class="mbr-section-btn align-left"><a href="" class="btn btn-warning-outline display-4">
-                                Rs 285000</a></div>
-                    </div>
-                </div>
-            </div>
-            <!--Card-4-->
-            
         </div>
     </div>
-</section>
+        
+    </section>
 
 <section class="cid-rggRyHaXRV" id="footer1-1i">
     <div class="container">

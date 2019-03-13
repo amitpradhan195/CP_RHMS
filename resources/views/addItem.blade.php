@@ -229,8 +229,8 @@
             <div class="input-group">
               <select class="form-control" name="ABS" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select ABS available or not? </option>
-                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="A">Available</option>
-                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="NA">Not Available</option>
+                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Available">Available</option>
+                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Not Available">Not Available</option>
               </select>
               @if ($errors->has('ABS'))
                                     <span class="invalid-feedback" role="alert">

@@ -27,21 +27,15 @@ Route::get('/userDash', function (){
 	return view('userDash');
 })->middleware('auth');
 
-Route::get('/bookings', function (){
-	return view('booking');
-})->middleware('auth');
+Route::get('/bookings', 'BookingController@show')->middleware('auth');
 
 Route::get('/gallery', function (){
 	return view('gallery');
-})->middleware('auth');
-
-Route::get('/products', function (){
-	return view('products');
-})->middleware('auth');
+});
 
 Route::get('/aboutUs', function(){
 	return view('aboutUs');
-})->middleware('auth');
+});
 
 Route::get('/billing', function (){
 	return view('billing');
@@ -59,12 +53,15 @@ Route::get('/editProfile', function (){
 	return view('editProfile');
 })->middleware('auth');
 
-// Route::get('/editProf/{id}', 'editProfile@store')->name('');
-
 Route::get('/editProfile/{id}', 'editProf@edit');
-// Route::put('/updateProfile/{id}', 'editProf@store');
+
 Route::put('/updateProfile/{id}', 'editProf@update');
 
 Route::put('/addedItem', 'AddItemController@create');
 
-Route::get('/products', 'AddItemController@show');
+Route::get('/products', 'AddItemController@show')->middleware('auth'); 
+
+Route::get('/addBooking/{id}', 'BookingController@index');
+
+Route::put('/addBooking/{id}', 'BookingController@store');
+

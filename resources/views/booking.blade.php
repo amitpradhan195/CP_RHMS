@@ -95,128 +95,135 @@
     
     <!--Container-->
     <div class="container">
-        <div class="row">
+        
             <!--Titles-->
             <div class="title pb-5 col-12">
                 <h2 class="align-left mbr-fonts-style m-0 display-1">Booked List
                 </h2>
                 
             </div>
-            <!--Item-1-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">
-                                Item no. 1</h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 140000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Item-2-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">Item no. 2
-                            </h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 180000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Item-3-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">Item no. 3
-                            </h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 125000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Item-4-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">Item no. 4
-                            </h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 240000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Item-5-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">Item no. 5
-                            </h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 190000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Item-6-->
-            <div class="card px-3 col-12">
-                <div class="card-wrapper media-container-row media-container-row">
-                    <div class="card-box">
-                        <div class="top-line pb-3">
-                            <h4 class="card-title mbr-fonts-style display-5">Item no. 6
-                            </h4>
-                            <p class="mbr-text cost mbr-fonts-style m-0 display-5">
-                                Rs 250000
-                            </p>
-                        </div>
-                        <div class="bottom-line">
-                            <p class="mbr-text mbr-fonts-style m-0 b-descr display-7">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, odit?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+            <table class="table table-hover">
+                <thead class="text-center" style="background-color: #474646; color: white;">
+                    <tr>
+                        <th class="card-title mbr-fonts-style display-5">S. No</th>
+                        <th class="card-title mbr-fonts-style display-5">Items</th>
+                        <th class="card-title mbr-fonts-style display-5">Date</th>
+                        <th class="card-title mbr-fonts-style display-5">Price</th>
+                        <th class="card-title mbr-fonts-style display-5">Image</th>
+                        <th class="card-title mbr-fonts-style display-5">Remove</th>
+                    </tr>
+                </thead>
+                <style type="text/css">
+                    table{
+                        counter-reset: tableCount;
+                    }
+
+                    .counterCell:before{
+                        content: counter(tableCount);
+                        counter-increment: tableCount;
+                    }
+                </style>
+
+                <tbody class="display-5 text-center">
+                    @if($bookingDetails->count()>0)
+                    @foreach($bookingDetails as $data) 
+                        <tr style="font-family: palatino;">
+                            <td class="counterCell"></td>
+                            <td>
+                                <!-- View More From Here -->
+
+                            <a data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">{{$data->modelName}}</a>
+
+                            <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
+                                <hr>
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Brand:  
+                                </label>
+                                {{ $data->brand }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Item Type:  
+                                </label>
+                                {{ $data->itemType }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Model Year:  
+                                </label>
+                                {{ $data->modelYear }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> CC:  
+                                </label>
+                                {{ $data->cc }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Cylinder:  
+                                </label>
+                                {{ $data->cylinder }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> No of Gears:  
+                                </label>
+                                {{ $data->noOfGears }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Mileage:  
+                                </label>
+                                {{ $data->mileage }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Front Brake:  
+                                </label>
+                                {{ $data->frontBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Rear Brake:  
+                                </label>
+                                {{ $data->rearBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Fuel Type:  
+                                </label>
+                                {{ $data->fuelType }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> ABS:  
+                                </label>
+                                {{ $data->ABS }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning display-4"> Description:  
+                                </label>
+                                {{ $data->description }}
+                                </h6>
+                            </div>
+                            </td>
+                            <td>{{date('Y-m-d h:ia', strtotime($data->bookingDate))}}</td>
+                            <td>{{$data->price}}</td>
+                            <td>
+                                <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
+                            </td>
+                            <td><a href="">Remove</a></td>
+                        </tr>
+                    @endforeach
+                    @else
+                        <tr style="font-family: palatino;">
+                            <td> No item has been booked yet.</td>
+                        </tr>
+                        @endif
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
