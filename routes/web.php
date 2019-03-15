@@ -41,9 +41,7 @@ Route::get('/billing', function (){
 	return view('billing');
 })->middleware('auth');
 
-Route::get('/addItem', function (){
-	return view('addItem');
-})->middleware('auth');
+Route::get('/addItem', 'AddItemTypeController@show');
 
 Auth::routes();
 
@@ -56,6 +54,8 @@ Route::get('/editProfile', function (){
 Route::get('/editProfile/{id}', 'editProf@edit');
 
 Route::put('/updateProfile/{id}', 'editProf@update');
+
+Route::post('/addItemType','AddItemTypeController@create');
 
 Route::put('/addedItem', 'AddItemController@create');
 

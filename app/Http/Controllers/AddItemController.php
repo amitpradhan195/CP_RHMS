@@ -46,7 +46,7 @@ class AddItemController extends Controller
 
             $Item = new addItem;
 
-            $Item->itemType = $request->itemType;
+            $Item->itemTypeId = $request->itemType;
             $Item->brand = $request->brand;
             $Item->modelName = $request->modelName;
             $Item->cc = $request->cc;
@@ -88,7 +88,10 @@ class AddItemController extends Controller
     public function show(addItem $addItem)
     {
 
-        $itemDetails = DB::table('tbl_items')->get()->toArray();
+        $itemDetails = DB::table('tbl_items')
+        ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+        ->get()
+        ->toArray();
 
 
         $user = auth()->user();

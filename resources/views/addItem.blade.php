@@ -123,15 +123,18 @@
             <div class="input-group">
                <select class="form-control{{ $errors->has('ItemType') ? ' is-invalid' : '' }}" value="{{ old('itemType') }}" name="itemType" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Motorcycle Type</option>
-                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Sports">Sports</option>
-                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Dirt">Dirt</option>
-                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Cruiser">Cruiser</option>
+                @foreach($search as $searched)
+                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="{{$searched->id}}">{{$searched->itemType}}</option>
+                @endforeach
               </select>
               @if ($errors->has('ItemType'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('ItemType') }}</strong>
                                     </span>
                                 @endif
+
+                <button type="button" data-target="#modalAddItemType" data-toggle="modal">Add Item Type</button>
+                <input class="panel-collapse collapse in" type="text" id="addItemType" name="AddItemType">
             </div>
             <br>
             
@@ -330,6 +333,16 @@
       }
 </script>
 
+<script>
+      var msg = '{{Session::get('fail')}}';
+      var exist = '{{Session::has('fail')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+</script>
+
+
  <script src="{{url('assets/web/assets/jquery/jquery.min.js') }}"></script>
   <script src="{{url('assets/popper/popper.min.js') }}"></script>
   <script src="{{url('assets/tether/tether.min.js') }}"></script>
@@ -342,6 +355,43 @@
   <script src="{{url('assets/masonry/masonry.pkgd.min.js') }}"></script>
   <script src="{{url('assets/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
   <script src="{{url('assets/theme/js/script.js') }}"></script>
+
+
+<div class="modal fade " id="modalAddItemType" role="dialog">
+  <div class="modal-dialog modal-dialog-center modal-sm">
+    <div class="modal-content ">
+     <div class="modal-header">
+      <h3 class="text-info " id="titleLogin"> Add Item Type </h3>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+     </div>
+        <div class="modal-body">
+          <form method="post" action="{{url('/addItemType')}}">
+            @csrf
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-motorcycle"></i> </span>
+              </div>
+              <input type="text" class="form-control{{ $errors->has('itemType') ? ' is-invalid' : '' }}" name="itemType" value="{{ old('itemType') }}" placeholder="Item Type" required autofocus>
+              @if ($errors->has('itemType'))
+                                    <span class="invalid-feedback" id="errorUsername" role="alert">
+                                        <strong>{{ $errors->first('itemType') }}</strong>
+                                    </span>
+                                @endif
+            </div>
+            
+            <div class="modal-footer text-center">
+        <button class="btn btn-primary-outline btn-sm" name="btnAdd" type="submit">Add</button>
+        <br>
+        
+          <button type="button" class="btn btn-warning-outline btn-sm" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>

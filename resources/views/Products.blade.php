@@ -230,11 +230,7 @@
                                 </h6>
                             </div>
 
-                           @if($bookingDetails->count()>0)
-                           Booked
-                            <button name="btnBook" class="btn btn-primary-outline display-4" disabled>
-                                        NRs. {{$data->price}}</button>
-                           @else
+
                            <form method="post" id="form_id" action="{{url('/addBooking',$data->itemId)}}">
                                 @csrf
                                 {{method_field('put')}}
@@ -254,7 +250,7 @@
                                     </div>
                                     </form>
 
-                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

@@ -30,7 +30,7 @@ class CreateTblItemTable extends Migration
             $table->string('img');
             $table->year('modelYear');
             $table->longtext('description');
-            $table->foreign('itemTypeId')->references('id')->on('tbl_itemType');
+            $table->foreign('itemTypeId')->references('id')->on('tbl_item_type');
             
             $table->timestamps();
         });

@@ -61,7 +61,8 @@ class BookingController extends Controller
         $user = auth()->user();
         $bookingDetails = DB::table('tbl_booking')
         ->join('tbl_items','tbl_items.itemId','=','tbl_booking.itemId')
-        ->select('tbl_booking.*','tbl_items.*')
+        ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+        ->select('tbl_booking.*','tbl_items.*','tbl_item_type.*')
         ->where('tbl_booking.userId','=',$user->id)
         ->get();
         return view('/booking', compact('bookingDetails'));
