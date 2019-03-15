@@ -15,7 +15,7 @@ class CreateTblItemTable extends Migration
     {
         Schema::create('tbl_items', function (Blueprint $table) {
             $table->increments('itemId');
-            $table->string('itemType');
+            $table->unsignedInteger('itemTypeId');
             $table->string('brand');
             $table->string('modelName');
             $table->integer('cc');
@@ -30,6 +30,7 @@ class CreateTblItemTable extends Migration
             $table->string('img');
             $table->year('modelYear');
             $table->longtext('description');
+            $table->foreign('itemTypeId')->references('id')->on('tbl_itemType');
             
             $table->timestamps();
         });

@@ -65,3 +65,7 @@ Route::get('/addBooking/{id}', 'BookingController@index');
 
 Route::put('/addBooking/{id}', 'BookingController@store');
 
+Route::get('/expiredBooking/{id}', 'BookingController@create');
+
+Route::put('/expiredBooking/{id}', 'BookingController@destroy');
+

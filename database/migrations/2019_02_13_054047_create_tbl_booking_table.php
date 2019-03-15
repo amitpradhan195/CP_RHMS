@@ -16,6 +16,7 @@ class CreateTblBookingTable extends Migration
         Schema::create('tbl_booking', function (Blueprint $table) {
             $table->increments('bookingId');
             $table->dateTime('bookingDate');
+            $table->dateTime('expireDate');
             $table->unsignedInteger('userId');
             $table->unsignedInteger('itemId');
             $table->foreign('userId')->references('id')->on('tbl_users');

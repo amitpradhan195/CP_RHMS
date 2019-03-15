@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Redirect;
 use DB;
-use Session;
 
 class AddItemController extends Controller
 {
@@ -88,12 +87,22 @@ class AddItemController extends Controller
      */
     public function show(addItem $addItem)
     {
-    //     $items=DB::table('tbl_items')->orderBy('itemId')->chunk(2,function ($items) {
-    // });
-    //     return redirect()->to('/products', ['petani' => $petani]);
 
         $itemDetails = DB::table('tbl_items')->get()->toArray();
-        return view('/products', compact('itemDetails'));
+
+
+        $user = auth()->user();
+        foreach ($itemDetails as $key => $value) {
+            $itemid = $value->itemId;
+        }
+
+            $bookingDetails = DB::table('tbl_booking')
+            ->select('tbl_booking.*')
+            ->where(['tbl_booking.userId'=>$user->id,
+                    'tbl_booking.itemId'=> $itemid])
+            ->get();
+        
+        return view('/products', compact('itemDetails','bookingDetails'));
     }
 
     /**

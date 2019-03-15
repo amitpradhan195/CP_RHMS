@@ -8,6 +8,6 @@ class Booking extends Model
 {
     protected $table="tbl_booking";
 
-    protected $fillable=['bookingDate','userId','itemId',
+    protected $fillable=['bookingDate', 'expireDate', 'userId', 'itemId',
     ];
 }

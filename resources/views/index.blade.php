@@ -63,16 +63,13 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="gallery"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Gallery</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
-                </li>
+                
                 <li class="nav-item"> 
                     <a class="nav-link link text-warning display-4" href="products"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
-                </li>
-
+                </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
            </ul>
 
             <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary-outline display-4" data-target="#modalLogin" href="{{ route('login') }}" data-toggle="modal"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Log In</a>

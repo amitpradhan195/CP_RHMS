@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\expiredBooking;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
+use Carbon;
 
 class BookingController extends Controller
 {
@@ -24,9 +26,9 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return redirect()->to('/bookings');
     }
 
     /**
@@ -39,9 +41,10 @@ class BookingController extends Controller
     {
         $booking = new Booking;
 
-        $booking->bookingDate= $request->bookingDate;
-        $booking->userId=$request->userId;
-        $booking->itemId=$id;
+        $booking->bookingDate = (Carbon\Carbon::now('Asia/Kathmandu')->toDateTimeString('Y-m-d H:i'));
+        $booking->expireDate = (Carbon\Carbon::now('Asia/Kathmandu')->addHours(48)->toDateTimeString('Y-m-d H:i'));
+        $booking->userId = $request->userId;
+        $booking->itemId = $id;
 
         $booking->save();
         return redirect()->to('/products')->with('bookingSuccess', 'Your booking is successful');
@@ -55,7 +58,6 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        // $bookingDetails = DB::table('tbl_booking')->get()->toArray();
         $user = auth()->user();
         $bookingDetails = DB::table('tbl_booking')
         ->join('tbl_items','tbl_items.itemId','=','tbl_booking.itemId')
@@ -94,8 +96,51 @@ class BookingController extends Controller
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking,$id)
     {
-        //
+
+            DB::beginTransaction();
+        //transaction with try catch for inserting booking details in expiredBooking table 
+
+            try {
+
+                $search = DB::table('tbl_booking')->select('userId', 'itemId')->first();
+
+                $insertExpired = new expiredBooking;
+                
+                $insertExpired->expiredDate = Carbon\Carbon::now('Asia/Kathmandu')->toDateTimeString('Y-m-d H:i');
+                $insertExpired->userId = $search->userId;
+                $insertExpired->itemId = $search->itemId;
+                
+                $insertExpired->save();
+            } 
+
+            catch (Exception $e) {
+                DB::rollback(); //rollback if insert transaction fails
+                throw $e;
+                
+                
+            }
+
+
+        //transaction with try catch for deleting booking details from Booking table
+
+            try {
+                $deleteBooking = Booking::where('bookingId',$id)->delete();
+            } 
+
+            catch (Exception $e) {
+                DB::rollback(); //rollback if delete transaction fails
+                throw $e;
+                
+                
+            }
+
+
+            //If both transaction are success then commit
+
+            DB::commit();
+
+            return redirect()->to('/bookings')->with('bookingRemoved', 'Your booking is successfully removed');
     }
 }

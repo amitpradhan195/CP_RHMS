@@ -230,7 +230,11 @@
                                 </h6>
                             </div>
 
-                           
+                           @if($bookingDetails->count()>0)
+                           Booked
+                            <button name="btnBook" class="btn btn-primary-outline display-4" disabled>
+                                        NRs. {{$data->price}}</button>
+                           @else
                            <form method="post" id="form_id" action="{{url('/addBooking',$data->itemId)}}">
                                 @csrf
                                 {{method_field('put')}}
@@ -238,8 +242,6 @@
                                 
                                 <!--Btn-->
                                 <div class="mbr-section-btn align-left">
-                                    <!-- Only for passing current date to the controller -->
-                                <input type="hidden" name="bookingDate" value="<?php date_default_timezone_set("Asia/Kathmandu");echo date('Y-m-d H:i'); ?>" />
 
                                  <!-- Only for passing item id to the controller -->
                                 <input type="hidden" name="itemId" value="{{$data->itemId}}"/>
@@ -247,25 +249,12 @@
                                 <!-- Only for passing user id to the controller -->
                                 <input type="hidden" name="userId" value="{{Auth::user()->id}}"/>
                                     
-                                    <button onclick="confirmBook()" type="submit" name="btnBook" class="btn btn-primary-outline display-4">
+                                    <button onclick="if (!confirm('Are you sure to book this item?')) { return false }" type="submit" name="btnBook" class="btn btn-primary-outline display-4">
                                         NRs. {{$data->price}}</button>
                                     </div>
-                                <script type="text/javascript">
-
-                                            
-                                            function confirmBook() {
-                                                if (confirm("Are you sure you want to book this item?")) 
-                                                {
-                                                    document.getElementById("form_id").submit();
-                                                        
-                                                } 
-                                                else 
-                                                {
-                                                    return false;
-                                                }
-                                            }
-                                        </script>
                                     </form>
+
+                                    @endif
                                 </div>
                             </div>
                         </div>
