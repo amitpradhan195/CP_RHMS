@@ -92,20 +92,8 @@ class AddItemController extends Controller
         ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
         ->get()
         ->toArray();
-
-
-        $user = auth()->user();
-        foreach ($itemDetails as $key => $value) {
-            $itemid = $value->itemId;
-        }
-
-            $bookingDetails = DB::table('tbl_booking')
-            ->select('tbl_booking.*')
-            ->where(['tbl_booking.userId'=>$user->id,
-                    'tbl_booking.itemId'=> $itemid])
-            ->get();
         
-        return view('/products', compact('itemDetails','bookingDetails'));
+        return view('/products', compact('itemDetails'));
     }
 
     /**

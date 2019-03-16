@@ -59,11 +59,11 @@ Route::post('/addItemType','AddItemTypeController@create');
 
 Route::put('/addedItem', 'AddItemController@create');
 
-Route::get('/products', 'AddItemController@show')->middleware('auth'); 
+Route::get('/products', 'AddItemController@show'); 
 
 Route::get('/addBooking/{id}', 'BookingController@index');
 
-Route::put('/addBooking/{id}', 'BookingController@store');
+Route::put('/addBooking/{id}', 'BookingController@store')->middleware('auth');
 
 Route::get('/expiredBooking/{id}', 'BookingController@create');
 
