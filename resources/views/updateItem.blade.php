@@ -7,7 +7,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" href="assets/images/motorbikelogo-96x96.png" type="image/x-icon">
   <meta name="description" content="Web Page Builder Description">
-  <title>addItem</title>
+  <title>Update Item</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}">
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}">
   <link rel="stylesheet" href="{{url('assets/web/assets/icons-bold/mobirise-icons-bold.css') }}">
@@ -26,7 +26,8 @@
   
 </head>
 <body>
-  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"><section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
+  <!-- <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"> -->
+  <section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
 
     
 
@@ -82,18 +83,137 @@
     </nav>
 </section>
 
+
+<section style="margin-top: 7%">
+  <div class="mx-2">
+  <hr>
+<h2 class="align-left mbr-fonts-style ml-3 display-1">List of Items</h2>
+<hr>
+  <table class="table table-hover">
+    <h5 class="ml-3">Select the item you want to edit.</h5>
+                <thead class="text-center" style="background-color: #474646; color: white;">
+                    <tr>
+                        <th class="card-title mbr-fonts-style display-5">S. No</th>
+                        <th class="card-title mbr-fonts-style display-5">Items</th>
+                        <th class="card-title mbr-fonts-style display-5">Brand</th>
+                        <th class="card-title mbr-fonts-style display-5">Items Type</th>
+                        <th class="card-title mbr-fonts-style display-5">Price</th>
+                        <th class="card-title mbr-fonts-style display-5">Image</th>
+                        <th class="card-title mbr-fonts-style display-5">Edit</th>
+                    </tr>
+                </thead>
+                <style type="text/css">
+                    
+                </style>
+
+                <tbody class="text-center" style="font-size: 18px;">
+                    @if($itemDetails->count()>0)
+                    @foreach($itemDetails as $data) 
+                        <tr style="font-family: palatino;">
+                            <td class="counterCell"></td>
+                            <td id="modelName">
+                                <!-- View More From Here -->
+                                {{$data->modelName}} &nbsp &nbsp
+                            <a class="viewInfo" style="font-family: 'Arial'; font-size: 12px;" data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View info</a>
+
+                            <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
+                                <hr>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  Model Year:
+                                <label class="display-4" style="color:#093FC4;">  {{ $data->modelYear }}  
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  CC: 
+                                <label class="display-4" style="color:#093FC4;"> 
+                                  {{ $data->cc }}  
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  Cylinder: 
+                                <label class="display-4" style="color:#093FC4;"> {{ $data->cylinder }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  No of Gears: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->noOfGears }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                   Mileage: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->mileage }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  Front Brake: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->frontBrake }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                  Rear Brake: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->rearBrake }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                   Fuel Type: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->fuelType }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                   ABS: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->ABS }} 
+                                </label>
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                    Description: 
+                                <label class="display-4" style="color:#093FC4;">{{ $data->description }}  
+                                </label>
+                                </h6>
+                            </div>
+                            </td>
+                            <td class="brands">{{$data->brand}}</td>
+                            <td>{{$data->itemType}}</td>
+                            <td>{{$data->price}}</td>
+                            <td>
+                                <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
+                            </td>
+
+                            <td>
+                                <button class="btn btn-sm btn-danger-outline getIds" value="{{$data->itemId}}">Edit</button>
+                            </td>
+
+                        </tr>
+                    @endforeach
+                    @else
+                        <tr style="font-family: palatino;">
+                            <td> No items has been booked.</td>
+                        </tr>
+                        @endif
+                </tbody>
+            </table>
+</div>
+</section>
+
 <section id="editProfBody">
 	<div class="container" id="formEditProf">
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-7" style="box-shadow:0px 0px 10px 3px #00bfff; margin-top:8%; " align="center">
-
           <form method="post" action="{{ url('/addedItem')}}" enctype="multipart/form-data">
           	@csrf
           	{!!method_field('put')!!}
             <h1 class="text-center">Add Item</h1>
             <br>
-            <h4 class="text-info" align="left">See below for the added items.</h4>
             <h5 class="text-primary" align="left">Fill up all the details.</h5>
             <hr>
             @if(Session::has('itemAdded'))
@@ -104,13 +224,11 @@
               <h4 class="pt-1 pb-1" style="color: #E0514F; background-color: #93D9D2;">{{Session::get('itemNameExists')}}</h4>
             @endif
 
-
-            
             <br>
 
             
             <div class="input-group">
-               <select class="form-control{{ $errors->has('ItemType') ? ' is-invalid' : '' }}" value="{{ old('itemType') }}" name="itemType" required>
+               <select id="itemType" class="form-control{{ $errors->has('ItemType') ? ' is-invalid' : '' }}" value="{{ old('itemType') }}" name="itemType" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Motorcycle Type</option>
                 @foreach($search as $searched)
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="{{$searched->id}}">{{$searched->itemType}}</option>
@@ -123,13 +241,13 @@
                                 @endif
 
                 <button type="button" data-target="#modalAddItemType" data-toggle="modal">Add Item Type</button>
-                <!-- <input class="panel-collapse collapse in" type="text" id="addItemType" name="AddItemType"> -->
+                <input class="panel-collapse collapse in" type="text" id="addItemType" name="AddItemType">
             </div>
             <br>
             
 
             <div class="input-group">
-              <input type="text" id="inputBrand" name="brand" value="{{ old('brand') }}" class="form-control{{ $errors->has('Brand') ? ' is-invalid' : '' }}" placeholder="Brand (@example: Suzuki)" required>
+              <input type="text" id="inputBrand" name="brand" class="form-control{{ $errors->has('Brand') ? ' is-invalid' : '' }}" placeholder="Brand (@example: Suzuki)" required>
               @if ($errors->has('Brand'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('Brand') }}</strong>
@@ -301,138 +419,16 @@
             <br>
 
             <br>
-            <button class="btn btn-primary btn-lg mx-3" name="btnAdd" type="submit">Add</button>
+            <button class="btn btn-primary btn-lg mx-3" name="btnEdit" type="submit">Edit</button>
             <button class="btn btn-warning btn-lg mx-3" name="btnCancel" type="submit">Cancel</button>
           </form>
+          
           <br>
 </div>
 </div>
 </div>
 
-<br>
 
-<div class="mx-3">
-  <hr>
-<h2 class="align-left mbr-fonts-style m-0 display-1">Added Items</h2>
-<hr>
-  <table class="table table-hover">
-                <thead class="text-center" style="background-color: #474646; color: white;">
-                    <tr>
-                        <th class="card-title mbr-fonts-style display-5">S. No</th>
-                        <th class="card-title mbr-fonts-style display-5">Items</th>
-                        <th class="card-title mbr-fonts-style display-5">Brand</th>
-                        <th class="card-title mbr-fonts-style display-5">Items Type</th>
-                        <th class="card-title mbr-fonts-style display-5">Price</th>
-                        <th class="card-title mbr-fonts-style display-5">Image</th>
-                    </tr>
-                </thead>
-                <style type="text/css">
-                    
-                </style>
-
-                <tbody class="text-center" style="font-size: 18px;">
-                    @if($itemDetails->count()>0)
-                    @foreach($itemDetails as $data) 
-                        <tr style="font-family: palatino;">
-                            <td class="counterCell"></td>
-                            <td>
-                                <!-- View More From Here -->
-                                {{$data->modelName}} &nbsp &nbsp
-                            <a class="viewInfo" style="font-family: 'Arial'; font-size: 12px;" data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View info</a>
-
-                            <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
-                                <hr>
-                                <!-- <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Brand:  
-                                </label>
-                                {{ $data->brand }}
-                                </h6> -->
-
-                                <!-- <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Item Type:  
-                                </label>
-                                {{ $data->itemType }}
-                                </h6> -->
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Model Year:  
-                                </label>
-                                {{ $data->modelYear }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> CC:  
-                                </label>
-                                {{ $data->cc }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Cylinder:  
-                                </label>
-                                {{ $data->cylinder }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> No of Gears:  
-                                </label>
-                                {{ $data->noOfGears }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Mileage:  
-                                </label>
-                                {{ $data->mileage }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Front Brake:  
-                                </label>
-                                {{ $data->frontBrake }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Rear Brake:  
-                                </label>
-                                {{ $data->rearBrake }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Fuel Type:  
-                                </label>
-                                {{ $data->fuelType }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> ABS:  
-                                </label>
-                                {{ $data->ABS }}
-                                </h6>
-
-                                <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Description:  
-                                </label>
-                                {{ $data->description }}
-                                </h6>
-                            </div>
-                            </td>
-                            <td>{{$data->brand}}</td>
-                            <td>{{$data->itemType}}</td>
-                            <td>{{$data->price}}</td>
-                            <td>
-                                <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
-                            </td>
-                        </tr>
-                    @endforeach
-                    @else
-                        <tr style="font-family: palatino;">
-                            <td> No items has been booked.</td>
-                        </tr>
-                        @endif
-                </tbody>
-            </table>
-</div>
-
-<br>
 <br>
 </section>
 
@@ -456,7 +452,7 @@
 </script>
 
 
- <script src="{{url('assets/web/assets/jquery/jquery.min.js') }}"></script>
+  <script src="{{url('assets/web/assets/jquery/jquery.min.js') }}"></script>
   <script src="{{url('assets/popper/popper.min.js') }}"></script>
   <script src="{{url('assets/tether/tether.min.js') }}"></script>
   <script src="{{url('assets/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -504,6 +500,47 @@
     </div>
   </div>
 </div>
+
+<script src="{{ asset('js/app.js') }}"></script>
+      </script>
+      <script>
+         jQuery(document).ready(function(){
+          $("#formEditProf").hide();
+            jQuery('.getIds').click(function(e){
+              e.preventDefault();
+              var id = jQuery(this).val();
+
+              var resp=$.ajax({
+                  url: "{{ URL('/editItem') }}",
+                  method: 'GET',
+                  datatype : 'json',
+                  data: {
+                     id : id
+                  },
+                  success: function(response){
+                    var data=JSON.parse(response);
+                     $("#formEditProf").show();
+                    console.log(data);
+                    // $('#itemType option[value="'+data[0].itemType+'"]').prop('selected', true);
+                    // $('#itemType').prop(data[0].itemType,data[0].itemTypeId)
+                     // $("#itemType").val(data[0].itemType).attr('selected','selected')
+                    // $('#itemType').val(data[0].itemType);
+                    // $('#itemType').append('<option value="'+data[0].itemTypeId+'" '+ (? ' selected ' : '') +'>'+data[0].ItemType+'</option>');
+
+                    $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true)
+                   }     
+                });
+
+              // Call Back function
+                  // .done(function(response) {
+                  //   var data=JSON.parse(response);
+                  //    $("#formEditProf").show();
+                  //   console.log(data);
+                  //   $('#inputBranded').val(data[0].brand);
+                  // });
+               });
+            });
+      </script>
 
 
 </body>

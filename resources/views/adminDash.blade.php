@@ -68,16 +68,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
-                </li>
-                <li class="nav-item"> 
-                    <a class="nav-link link text-warning display-4" href="products"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
-                </li> --> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
             </ul>
 
             <div class="btn-group">
@@ -119,7 +110,7 @@
                 <div class="mbr-section-btn">
                     <a class="btn btn-md btn-primary-outline display-4" href="/addItem">Add Items<br>
                     </a> 
-                    <a class="btn btn-md btn-primary-outline display-4" href="#">Update Items<br>
+                    <a class="btn btn-md btn-primary-outline display-4" href="/updateItem">Update Items<br>
                     </a>
                     <a class="btn btn-md btn-primary-outline display-4" href="#">Delete Items<br>
                     </a>

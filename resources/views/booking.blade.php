@@ -129,29 +129,7 @@
                     </tr>
                 </thead>
                 <style type="text/css">
-                    table{
-                        counter-reset: tableCount;
-                    }
-
-                    .counterCell:before{
-                        content: counter(tableCount);
-                        counter-increment: tableCount;
-                    }
-
-                    .viewInfo:hover{
-                        text-decoration: underline;
-                    }
-
-                    .deleteIcon
-                    {
-                        font-size: 30px;
-                        background-color: #EE4141;
-                    }
-
-                    .deleteIcon:hover
-                    {
-                        font-size: 35px;
-                    }
+                    
                 </style>
 
                 <tbody class="text-center" style="font-size: 18px;">

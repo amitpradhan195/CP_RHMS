@@ -43,7 +43,9 @@ Route::get('/billing', function (){
 
 Route::get('/addItem', 'AddItemTypeController@show');
 
-Auth::routes();
+Route::get('/updateItem', 'AddItemTypeController@show2');
+
+Auth::routes(); 
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -68,4 +70,6 @@ Route::put('/addBooking/{id}', 'BookingController@store')->middleware('auth');
 Route::get('/expiredBooking/{id}', 'BookingController@create');
 
 Route::put('/expiredBooking/{id}', 'BookingController@destroy');
+
+Route::get('/editItem', 'AddItemTypeController@edit');
 

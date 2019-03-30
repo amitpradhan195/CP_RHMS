@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\addItemType;
 use Illuminate\Http\Request;
 use DB;
+use Response;
 
 class AddItemTypeController extends Controller
 {
@@ -36,6 +37,7 @@ class AddItemTypeController extends Controller
             $itemTypes->save();
             return redirect()->back()->with('success','Item Type added successfully');
         }
+
         else
         {
             return redirect()->back()->with('fail','Item Type already exists'); 
@@ -55,7 +57,7 @@ class AddItemTypeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.-+-----
      *
      * @param  \App\addItemType  $addItemType
      * @return \Illuminate\Http\Response
@@ -63,7 +65,21 @@ class AddItemTypeController extends Controller
     public function show(addItemType $addItemType)
     {
         $search = DB::table('tbl_item_type')->get()->toArray();
-        return view('/additem', compact('search'));
+
+        $itemDetails = DB::table('tbl_items')
+        ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+        ->get();
+        return view('/addItem', compact('search','itemDetails'));
+    }
+
+    public function show2(addItemType $addItemType)
+    {
+        $search = DB::table('tbl_item_type')->get()->toArray();
+        
+        $itemDetails = DB::table('tbl_items')
+        ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+        ->get();
+        return view('/updateItem', compact('search','itemDetails'));
     }
 
     /**
@@ -72,9 +88,30 @@ class AddItemTypeController extends Controller
      * @param  \App\addItemType  $addItemType
      * @return \Illuminate\Http\Response
      */
-    public function edit(addItemType $addItemType)
+    public function edit(Request $request)
     {
-        //
+        //For edit item in update item blade
+            if ($request->isMethod('get')) 
+            {
+                $items=DB::table('tbl_items')
+                    ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                    ->where('tbl_items.itemId','=', $request->id )
+                    ->get();
+
+                // $brand = $items->brand;
+
+                return json_encode($items);
+            }
+
+            else
+            {
+                return "Not Found";
+            }
+
+                // return view('updateItem', ['items' => $items]);
+
+                // $html = view('updateItem')->with(compact('items'))->render();
+                // return response()->json(['success' => true, 'html' => $html]);
     }
 
     /**

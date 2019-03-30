@@ -254,7 +254,7 @@
                             </div>
 
 
-                           <form method="post" id="form_id" action="{{url('/addBooking',$data->itemId)}}">
+                           <form method="post"  action="{{url('/addBooking',$data->itemId)}}">
                                 @csrf
                                 {{method_field('put')}}
 
