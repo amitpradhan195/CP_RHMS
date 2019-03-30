@@ -90,28 +90,7 @@ class AddItemTypeController extends Controller
      */
     public function edit(Request $request)
     {
-        //For edit item in update item blade
-            if ($request->isMethod('get')) 
-            {
-                $items=DB::table('tbl_items')
-                    ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
-                    ->where('tbl_items.itemId','=', $request->id )
-                    ->get();
-
-                // $brand = $items->brand;
-
-                return json_encode($items);
-            }
-
-            else
-            {
-                return "Not Found";
-            }
-
-                // return view('updateItem', ['items' => $items]);
-
-                // $html = view('updateItem')->with(compact('items'))->render();
-                // return response()->json(['success' => true, 'html' => $html]);
+        //
     }
 
     /**

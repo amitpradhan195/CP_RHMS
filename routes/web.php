@@ -71,5 +71,7 @@ Route::get('/expiredBooking/{id}', 'BookingController@create');
 
 Route::put('/expiredBooking/{id}', 'BookingController@destroy');
 
-Route::get('/editItem', 'AddItemTypeController@edit');
+Route::get('/editItem', 'AddItemController@edit');
+
+Route::put('/itemUpdate', 'AddItemController@update');
 

@@ -87,26 +87,26 @@
 <section style="margin-top: 7%">
   <div class="mx-2">
   <hr>
-<h2 class="align-left mbr-fonts-style ml-3 display-1">List of Items</h2>
+<h1 class="align-left mbr-fonts-style ml-3">List of Items</h1>
 <hr>
   <table class="table table-hover">
     <h5 class="ml-3">Select the item you want to edit.</h5>
                 <thead class="text-center" style="background-color: #474646; color: white;">
                     <tr>
-                        <th class="card-title mbr-fonts-style display-5">S. No</th>
-                        <th class="card-title mbr-fonts-style display-5">Items</th>
-                        <th class="card-title mbr-fonts-style display-5">Brand</th>
-                        <th class="card-title mbr-fonts-style display-5">Items Type</th>
-                        <th class="card-title mbr-fonts-style display-5">Price</th>
-                        <th class="card-title mbr-fonts-style display-5">Image</th>
-                        <th class="card-title mbr-fonts-style display-5">Edit</th>
+                        <th class="card-title mbr-fonts-style">S. No</th>
+                        <th class="card-title mbr-fonts-style ">Items</th>
+                        <th class="card-title mbr-fonts-style ">Brand</th>
+                        <th class="card-title mbr-fonts-style ">Items Type</th>
+                        <th class="card-title mbr-fonts-style ">Price</th>
+                        <th class="card-title mbr-fonts-style ">Image</th>
+                        <th class="card-title mbr-fonts-style ">Edit</th>
                     </tr>
                 </thead>
                 <style type="text/css">
                     
                 </style>
 
-                <tbody class="text-center" style="font-size: 18px;">
+                <tbody class="text-center" style="font-size: 14px;">
                     @if($itemDetails->count()>0)
                     @foreach($itemDetails as $data) 
                         <tr style="font-family: palatino;">
@@ -185,7 +185,7 @@
                             <td>{{$data->itemType}}</td>
                             <td>{{$data->price}}</td>
                             <td>
-                                <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
+                                <img src="/{{$data->img}}" style="height: 100px; width: 150px;">
                             </td>
 
                             <td>
@@ -209,9 +209,9 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-7" style="box-shadow:0px 0px 10px 3px #00bfff; margin-top:8%; " align="center">
-          <form method="post" action="{{ url('/addedItem')}}" enctype="multipart/form-data">
+          <form method="post" action="{{ url('/itemUpdate')}}" enctype="multipart/form-data">
           	@csrf
-          	{!!method_field('put')!!}
+          	{{method_field('put')}}
             <h1 class="text-center">Add Item</h1>
             <br>
             <h5 class="text-primary" align="left">Fill up all the details.</h5>
@@ -226,7 +226,8 @@
 
             <br>
 
-            
+            <input type="hidden" id="itemId" name="itemId">
+
             <div class="input-group">
                <select id="itemType" class="form-control{{ $errors->has('ItemType') ? ' is-invalid' : '' }}" value="{{ old('itemType') }}" name="itemType" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Motorcycle Type</option>
@@ -278,7 +279,7 @@
             <br>
 
             <div class="input-group">
-              <input type="number" min="1" id="inputDob" name="cylinder" class="form-control{{ $errors->has('cylinder') ? ' is-invalid' : '' }}" value="" placeholder="Cylinder" required>
+              <input type="number" min="1" id="inputCylinder" name="cylinder" class="form-control{{ $errors->has('cylinder') ? ' is-invalid' : '' }}" value="" placeholder="Cylinder" required>
               @if ($errors->has('cylinder'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('cylinder') }}</strong>
@@ -376,13 +377,13 @@
             <br>
 
             <div class="input-group">
-              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="img" class="form-control{{ $errors->has('img') ? ' is-invalid' : '' }}" onchange="PreviewImage();"required>
+              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="img" class="form-control{{ $errors->has('img') ? ' is-invalid' : '' }}" onchange="PreviewImage();">
               @if ($errors->has('img'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('img') }}</strong>
                                     </span>
                                 @endif
-            <img id="uploadPreview" style="width: 150px; height: 150px;" />
+            <img id="uploadPreview" style="width: 180px; height: 150px;" />
             <script type="text/javascript">
 
                 function PreviewImage() {
@@ -409,7 +410,7 @@
             <br>
 
             <div class="input-group">
-              <textarea rows="6" name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Enter description here..."></textarea>
+              <textarea rows="6" id="inputDescription" name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Enter description here..."></textarea>
               @if ($errors->has('description'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -420,7 +421,7 @@
 
             <br>
             <button class="btn btn-primary btn-lg mx-3" name="btnEdit" type="submit">Edit</button>
-            <button class="btn btn-warning btn-lg mx-3" name="btnCancel" type="submit">Cancel</button>
+            <button class="btn btn-warning btn-lg mx-3" name="btnCancel" type="button" id="btnCancel">Cancel</button>
           </form>
           
           <br>
@@ -439,6 +440,11 @@
       if(exist)
       {
         alert(msg);
+      }
+
+      if('{{Session::has('updatedItem')}}')
+      {
+        alert('{{Session::get('updatedItem')}}');
       }
 </script>
 
@@ -504,9 +510,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
       </script>
       <script>
-         jQuery(document).ready(function(){
+         $(document).ready(function(){
           $("#formEditProf").hide();
-            jQuery('.getIds').click(function(e){
+            $('.getIds').click(function(e){
               e.preventDefault();
               var id = jQuery(this).val();
 
@@ -519,15 +525,25 @@
                   },
                   success: function(response){
                     var data=JSON.parse(response);
+
                      $("#formEditProf").show();
                     console.log(data);
-                    // $('#itemType option[value="'+data[0].itemType+'"]').prop('selected', true);
-                    // $('#itemType').prop(data[0].itemType,data[0].itemTypeId)
-                     // $("#itemType").val(data[0].itemType).attr('selected','selected')
-                    // $('#itemType').val(data[0].itemType);
-                    // $('#itemType').append('<option value="'+data[0].itemTypeId+'" '+ (? ' selected ' : '') +'>'+data[0].ItemType+'</option>');
-
-                    $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true)
+                    $('#itemId').val(data[0].itemId);
+                    $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true);
+                    $('#inputBrand').val(data[0].brand);
+                    $('#inputModelName').val(data[0].modelName);
+                    $('#inputCC').val(data[0].cc);
+                    $('#inputCylinder').val(data[0].cylinder);
+                    $('#inputNoOfGears').val(data[0].noOfGears);
+                    $('#inputMileage').val(data[0].mileage);
+                    $('select[name="frontBrake"]').find('option[value="'+data[0].frontBrake+'"]').attr("selected",true);
+                    $('select[name="rearBrake"]').find('option[value="'+data[0].rearBrake+'"]').attr("selected",true);
+                    $('select[name="ABS"]').find('option[value="'+data[0].ABS+'"]').attr("selected",true);
+                    $('select[name="fuelType"]').find('option[value="'+data[0].fuelType+'"]').attr("selected",true);
+                    $('#inputPrice').val(data[0].price);
+                    $("#uploadPreview").attr("src", data[0].img);
+                    $('#inputModelYear').val(data[0].modelYear);
+                    $('#inputDescription').val(data[0].description);
                    }     
                 });
 
@@ -540,6 +556,14 @@
                   // });
                });
             });
+      </script>
+
+      <script type="text/javascript">
+        
+         $('#btnCancel').click(function(){
+
+              $("#formEditProf").hide();
+          });
       </script>
 
 

@@ -102,9 +102,23 @@ class AddItemController extends Controller
      * @param  \App\addItem  $addItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(addItem $addItem)
+    public function edit(Request $request)
     {
-        //
+        //For edit item in update item blade
+            if ($request->isMethod('get')) 
+            {
+                $items=DB::table('tbl_items')
+                    ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                    ->where('tbl_items.itemId','=', $request->id )
+                    ->get();
+
+                return json_encode($items);
+            }
+
+            else
+            {
+                return "Not Found";
+            }
     }
 
     /**
@@ -116,7 +130,44 @@ class AddItemController extends Controller
      */
     public function update(Request $request, addItem $addItem)
     {
-        //
+
+        $pictureInfo = $request->file('img');
+
+        if($pictureInfo)
+        {
+            $picName = $pictureInfo->getClientOriginalName();
+
+            $folder = "itemImages/";
+
+            $pictureInfo->move($folder,$picName);
+
+            $picUrl = $folder.$picName;
+
+            if(addItem::where('img', '=', $picUrl)->exists()) 
+            {
+                return redirect('/addItem')->with('itemNameExists','Please!!insert image with another name');
+            }
+
+            else{
+                DB::table('tbl_items')
+                ->where('itemId', $request->itemId)
+                ->update(['itemTypeId' => $request->itemType, 'brand' => $request->brand, 'modelName' => $request->modelName,
+                 'cc' => $request->cc, 'cylinder' => $request->cylinder, 'noOfGears' => $request->noOfGears, 'mileage' => $request->mileage,
+                 'frontBrake' => $request->frontBrake, 'rearBrake' => $request->rearBrake, 'fuelType' => $request->fuelType, 'ABS' => $request->ABS, 'price' => $request->price, 'img' => $picUrl, 'modelYear' => $request->modelYear, 'description' => $request->description]);
+            }
+        }
+        
+
+        else
+        {
+            DB::table('tbl_items')
+                ->where('itemId', $request->itemId)
+                ->update(['itemTypeId' => $request->itemType, 'brand' => $request->brand, 'modelName' => $request->modelName,
+                 'cc' => $request->cc, 'cylinder' => $request->cylinder, 'noOfGears' => $request->noOfGears, 'mileage' => $request->mileage,
+                 'frontBrake' => $request->frontBrake, 'rearBrake' => $request->rearBrake, 'fuelType' => $request->fuelType, 'ABS' => $request->ABS, 'price' => $request->price, 'modelYear' => $request->modelYear, 'description' => $request->description]);
+        }
+
+        return redirect()->to('/updateItem')->with('updatedItem', 'Item updated successfully');
     }
 
     /**
