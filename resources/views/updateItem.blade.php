@@ -26,10 +26,8 @@
   
 </head>
 <body>
-  <!-- <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"> -->
+  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290">
   <section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
-
-    
 
      <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +51,17 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="adminDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
+                    <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-gift mbr-iconfont mbr-iconfont-btn"></span>Edit Item</a>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>View Bookings</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
             </ul>
 
@@ -87,6 +94,24 @@
 <section style="margin-top: 7%">
   <div class="mx-2">
   <hr>
+  @if(Session::has('updatedItem'))
+    <h4 class="pt-1 pb-1 px-3" style="color: white; background-color: #93D9D2;">{{Session::get('updatedItem')}}</h4>
+  @endif
+
+  @if(Session::has('itemNameExists'))
+    <h4 class="pt-1 pb-1 px-3" style="color: #E0514F; background-color: #93D9D2;">{{Session::get('itemNameExists')}}</h4>
+  @endif
+
+  @if(Session::has('delSuccess'))
+    <h4 class="pt-1 pb-1 px-3" style="color:white; background-color: #E0514F; opacity: 0.9">{{Session::get('delSuccess')}}</h4>
+  @endif
+
+  @if(Session::has('errorBooked'))
+    <h4 class="pt-1 pb-1 px-3" style="color:white; background-color: #E0514F; opacity: 0.7">{{Session::get('errorBooked')}}</h4>
+  @endif
+
+
+
 <h1 class="align-left mbr-fonts-style ml-3">List of Items</h1>
 <hr>
   <table class="table table-hover">
@@ -100,6 +125,7 @@
                         <th class="card-title mbr-fonts-style ">Price</th>
                         <th class="card-title mbr-fonts-style ">Image</th>
                         <th class="card-title mbr-fonts-style ">Edit</th>
+                        <th class="card-title mbr-fonts-style ">Delete</th>
                     </tr>
                 </thead>
                 <style type="text/css">
@@ -192,6 +218,14 @@
                                 <button class="btn btn-sm btn-danger-outline getIds" value="{{$data->itemId}}">Edit</button>
                             </td>
 
+                            <td>
+                              <form method="post" action="{{url('/itemDelete', $data->itemId)}}">
+                                @csrf
+                                {{method_field('delete')}}
+                                <button class="btn btn-sm btn-danger-outline delItems" >Delete</button>
+                              </form>
+                            </td>
+
                         </tr>
                     @endforeach
                     @else
@@ -204,6 +238,18 @@
 </div>
 </section>
 
+<style type="text/css">
+  .delItems:hover
+  {
+    background-color: red;
+  }
+
+  .getIds:hover
+  {
+    background-color: orange;
+  }
+</style>
+
 <section id="editProfBody">
 	<div class="container" id="formEditProf">
       <div class="row">
@@ -212,17 +258,11 @@
           <form method="post" action="{{ url('/itemUpdate')}}" enctype="multipart/form-data">
           	@csrf
           	{{method_field('put')}}
+
             <h1 class="text-center">Add Item</h1>
             <br>
             <h5 class="text-primary" align="left">Fill up all the details.</h5>
             <hr>
-            @if(Session::has('itemAdded'))
-              <h4 class="pt-1 pb-1" style="color: white; background-color: #93D9D2;">{{Session::get('itemAdded')}}</h4>
-            @endif
-
-            @if(Session::has('itemNameExists'))
-              <h4 class="pt-1 pb-1" style="color: #E0514F; background-color: #93D9D2;">{{Session::get('itemNameExists')}}</h4>
-            @endif
 
             <br>
 
@@ -310,7 +350,7 @@
             <br>
 
             <div class="input-group">
-              <select class="form-control" name="frontBrake" required>
+              <select class="form-control" name="frontBrake" id="frontBrake" required>
                   <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Front Brake Type</option>
                   <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Drum">Drum</option>
                   <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Disc">Disc</option>
@@ -324,7 +364,7 @@
             <br>
 
             <div class="input-group">
-              <select class="form-control" name="rearBrake" required>
+              <select class="form-control" name="rearBrake" id="rearBrake" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Rear Brake Type</option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Drum">Drum</option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Disc">Disc</option>
@@ -338,7 +378,7 @@
             <br>
 
             <div class="input-group">
-              <select class="form-control" name="ABS" required>
+              <select class="form-control" name="ABS" id="ABS" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select ABS available or not? </option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Available">Available</option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Not Available">Not Available</option>
@@ -352,7 +392,7 @@
             <br>
 
             <div class="input-group">
-              <select class="form-control{{ $errors->has('fuelType') ? ' is-invalid' : '' }}" name="fuelType" required>
+              <select class="form-control{{ $errors->has('fuelType') ? ' is-invalid' : '' }}" name="fuelType" id="fuelType" required>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value=""> Select Fuel Type</option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Petrol">Petrol</option>
                 <option class="mbr-text pl-5 mbr-fonts-style display-4" value="Diesel">Diesel</option>
@@ -420,7 +460,7 @@
             <br>
 
             <br>
-            <button class="btn btn-primary btn-lg mx-3" name="btnEdit" type="submit">Edit</button>
+            <button class="btn btn-primary btn-lg mx-3" id="btnEdit" name="btnEdit" type="submit">Edit</button>
             <button class="btn btn-warning btn-lg mx-3" name="btnCancel" type="button" id="btnCancel">Cancel</button>
           </form>
           
@@ -428,6 +468,62 @@
 </div>
 </div>
 </div>
+
+
+<script src="{{ asset('js/app.js') }}"></script>
+      <script>
+         $(document).ready(function(){
+          $("#formEditProf").hide();
+            $('.getIds').click(function(e){
+              e.preventDefault();
+              var id = jQuery(this).val();
+
+              var resp=$.ajax({
+                  url: "{{ URL('/editItem') }}",
+                  method: 'GET',
+                  datatype : 'json',
+                  data: {
+                     id : id
+                  },
+                  success: function(response){
+                    var data=JSON.parse(response);
+
+                     $("#formEditProf").show();
+                    console.log(data);
+                    $('#itemId').val(data[0].itemId);
+                    // $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true);
+                    $("#itemType").val(data[0].itemTypeId).change();
+                    $('#inputBrand').val(data[0].brand);
+                    $('#inputModelName').val(data[0].modelName);
+                    $('#inputCC').val(data[0].cc);
+                    $('#inputCylinder').val(data[0].cylinder);
+                    $('#inputNoOfGears').val(data[0].noOfGears);
+                    $('#inputMileage').val(data[0].mileage);
+                    // $('select[name="frontBrake"]').find('option[value="'+data[0].frontBrake+'"]').attr("selected",true);
+                    $("#frontBrake").val(data[0].frontBrake).change();
+                    // $('select[name="rearBrake"]').find('option[value="'+data[0].rearBrake+'"]').attr("selected",true);
+                    $("#rearBrake").val(data[0].rearBrake).change();
+                    // $('select[name="ABS"]').find('option[value="'+data[0].ABS+'"]').attr("selected",true);
+                    $("#ABS").val(data[0].ABS).change();
+                    // $('select[name="fuelType"]').find('option[value="'+data[0].fuelType+'"]').attr("selected",true);
+                    $("#fuelType").val(data[0].fuelType).change();
+                    $('#inputPrice').val(data[0].price);
+                    $("#uploadPreview").attr("src", data[0].img);
+                    $('#inputModelYear').val(data[0].modelYear);
+                    $('#inputDescription').val(data[0].description);
+                   }     
+                });
+
+              // Call Back function
+                  // .done(function(response) {
+                  //   var data=JSON.parse(response);
+                  //    $("#formEditProf").show();
+                  //   console.log(data);
+                  //   $('#inputBranded').val(data[0].brand);
+                  // });
+               });
+            });
+      </script>
 
 
 <br>
@@ -506,57 +602,6 @@
     </div>
   </div>
 </div>
-
-<script src="{{ asset('js/app.js') }}"></script>
-      </script>
-      <script>
-         $(document).ready(function(){
-          $("#formEditProf").hide();
-            $('.getIds').click(function(e){
-              e.preventDefault();
-              var id = jQuery(this).val();
-
-              var resp=$.ajax({
-                  url: "{{ URL('/editItem') }}",
-                  method: 'GET',
-                  datatype : 'json',
-                  data: {
-                     id : id
-                  },
-                  success: function(response){
-                    var data=JSON.parse(response);
-
-                     $("#formEditProf").show();
-                    console.log(data);
-                    $('#itemId').val(data[0].itemId);
-                    $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true);
-                    $('#inputBrand').val(data[0].brand);
-                    $('#inputModelName').val(data[0].modelName);
-                    $('#inputCC').val(data[0].cc);
-                    $('#inputCylinder').val(data[0].cylinder);
-                    $('#inputNoOfGears').val(data[0].noOfGears);
-                    $('#inputMileage').val(data[0].mileage);
-                    $('select[name="frontBrake"]').find('option[value="'+data[0].frontBrake+'"]').attr("selected",true);
-                    $('select[name="rearBrake"]').find('option[value="'+data[0].rearBrake+'"]').attr("selected",true);
-                    $('select[name="ABS"]').find('option[value="'+data[0].ABS+'"]').attr("selected",true);
-                    $('select[name="fuelType"]').find('option[value="'+data[0].fuelType+'"]').attr("selected",true);
-                    $('#inputPrice').val(data[0].price);
-                    $("#uploadPreview").attr("src", data[0].img);
-                    $('#inputModelYear').val(data[0].modelYear);
-                    $('#inputDescription').val(data[0].description);
-                   }     
-                });
-
-              // Call Back function
-                  // .done(function(response) {
-                  //   var data=JSON.parse(response);
-                  //    $("#formEditProf").show();
-                  //   console.log(data);
-                  //   $('#inputBranded').val(data[0].brand);
-                  // });
-               });
-            });
-      </script>
 
       <script type="text/javascript">
         

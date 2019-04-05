@@ -21,12 +21,11 @@
   <link rel="stylesheet" href="{{url('assets/css/mbr-additional.css') }}" type="text/css">
   <link rel="stylesheet" type="text/css" href="{{url('assets/fontawesome/css/all.min.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{url('style.css') }}" />
-  
-  
-  
 </head>
+
 <body>
-  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"><section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
+  <!-- <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-2g" data-rv-view="290"> -->
+  <section class="menu cid-rgarQyhyTr" once="menu" id="menu1-2g">
 
     
 
@@ -52,8 +51,17 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="adminDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
+                    <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-gift mbr-iconfont mbr-iconfont-btn"></span>Edit Item</a>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>View Bookings</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
             </ul>
 
@@ -123,7 +131,6 @@
                                 @endif
 
                 <button type="button" data-target="#modalAddItemType" data-toggle="modal">Add Item Type</button>
-                <!-- <input class="panel-collapse collapse in" type="text" id="addItemType" name="AddItemType"> -->
             </div>
             <br>
             

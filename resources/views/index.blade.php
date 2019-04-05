@@ -20,6 +20,11 @@
   <link rel="stylesheet" type="text/css" href="{{url('assets/fontawesome/css/all.min.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{url('style.css') }}" />
   
+  <style type="text/css">
+      .form-control{
+        font-size: 0.8rem;
+      }
+  </style>
   
   
 </head>
@@ -448,9 +453,9 @@ $(document).ready(function(){
 <div class="modal fade" id="modalSignup">
   <div class="modal-dialog modal-dialog-center modal-md">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="text-center text-danger" id="titleSignup"> SignUp </h1>
-        <img src="addUser.png" alt="Logo" style="width:60px;">
+      <div class="modal-header col-md-12 align-center">
+        <h1 class="text-center text-danger" style="font-size: 30px;" id="titleSignup"> Sign Up </h1>
+        <!-- <img src="addUser.png" alt="Logo" style="width:35px;"> -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body" id="scrollSignup">
@@ -496,7 +501,7 @@ $(document).ready(function(){
             <br>
 
             <div class="form-group row">
-              <label class="col-sm-2 font-weight-bold text-secondary">Gender: </label>
+              <label class="col-sm-2 font-weight-bold text-info">Gender: </label>
               <div class="col-sm-10">
                   <div class="form-check form-check-inline">
                       <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optMale" value="Male" checked>

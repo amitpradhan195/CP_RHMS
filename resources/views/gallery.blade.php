@@ -128,14 +128,17 @@
             <div class="mbr-gallery-layout-default">
               <div>
                 <div>
+                  @foreach($getImage as $data)
                   <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome">
                     <div href="#lb-gallery2-12" data-slide-to="0" data-toggle="modal">
-                      <img src="assets/images/mbr-1920x1361-800x567.jpg" alt="bikeImg" title="">
+                      <!-- <img src="assets/images/mbr-1920x1361-800x567.jpg" alt="bikeImg" title=""> -->
+                      <img src="/{{$data->img}}" alt="bikeImg"  title="">
                       <span class="icon-focus"></span>
                     </div>
                   </div>
+                  @endforeach
 
-                  <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive">
+                  <!-- <div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive">
                     <div href="#lb-gallery2-12" data-slide-to="1" data-toggle="modal">
                       <img src="assets/images/mbr-1920x1280-800x533.jpg" alt="bikeImg" title="">
                       <span class="icon-focus"></span>
@@ -210,7 +213,7 @@
                       <img src="assets/images/mbr-1920x1307-800x545.jpg" alt="bikeImg" title="">
                       <span class="icon-focus"></span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 

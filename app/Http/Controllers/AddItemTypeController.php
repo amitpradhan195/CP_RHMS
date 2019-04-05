@@ -16,7 +16,8 @@ class AddItemTypeController extends Controller
      */
     public function index()
     {
-        //
+        $getImage = DB::table('tbl_items')->select('tbl_items.img')->get();
+        return view('gallery',compact('getImage'));
     }
 
     /**

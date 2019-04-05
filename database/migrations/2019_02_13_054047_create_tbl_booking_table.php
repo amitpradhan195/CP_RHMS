@@ -19,6 +19,7 @@ class CreateTblBookingTable extends Migration
             $table->dateTime('expireDate');
             $table->unsignedInteger('userId');
             $table->unsignedInteger('itemId');
+            $table->string('status');
             $table->foreign('userId')->references('id')->on('tbl_users');
             $table->foreign('itemId')->references('itemId')->on('tbl_items');
 

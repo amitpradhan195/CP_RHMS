@@ -100,6 +100,11 @@
       {
         alert(msg);
       }
+
+      if('{{Session::has('orderSuccess')}}')
+      {
+        alert('{{Session::get('orderSuccess')}}');
+      }
     </script>
 
 <section class="services5 cid-rgggJIKaMb" id="services5-17">
@@ -114,25 +119,23 @@
                 <h2 class="align-left mbr-fonts-style m-0 display-1">Booked List
                 </h2>
                 <hr>
-                <p> Your Booking is valid for only 48 hours. Please confirm your bookings by contacting us before it expires.</p>
+                <p> Your Booking is valid for only 48 hours. Please confirm your bookings before it expires.</p>
             
             <table class="table table-hover">
                 <thead class="text-center" style="background-color: #474646; color: white;">
                     <tr>
-                        <th class="card-title mbr-fonts-style display-5">S. No</th>
-                        <th class="card-title mbr-fonts-style display-5">Items</th>
-                        <th class="card-title mbr-fonts-style display-5">Booking Date</th>
-                        <th class="card-title mbr-fonts-style display-5">Expire Date</th>
-                        <th class="card-title mbr-fonts-style display-5">Price</th>
-                        <th class="card-title mbr-fonts-style display-5">Image</th>
-                        <th class="card-title mbr-fonts-style display-5">Remove</th>
+                        <th class="card-title mbr-fonts-style display-7">S. No</th>
+                        <th class="card-title mbr-fonts-style display-7">Items</th>
+                        <th class="card-title mbr-fonts-style display-7">Booking Date</th>
+                        <th class="card-title mbr-fonts-style display-7">Expire Date</th>
+                        <th class="card-title mbr-fonts-style display-7">Price</th>
+                        <th class="card-title mbr-fonts-style display-7">Image</th>
+                        <th class="card-title mbr-fonts-style display-7">Remove</th>
+                        <th class="card-title mbr-fonts-style display-7">Confirm Booking</th>
                     </tr>
                 </thead>
-                <style type="text/css">
-                    
-                </style>
 
-                <tbody class="text-center" style="font-size: 18px;">
+                <tbody class="text-center" style="font-size: 16px;">
                     @if($bookingDetails->count()>0)
                     @foreach($bookingDetails as $data) 
                         <tr style="font-family: palatino;">
@@ -145,73 +148,73 @@
                             <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
                                 <hr>
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Brand:  
+                                <label class=" text-warning display-7"> Brand:  
                                 </label>
                                 {{ $data->brand }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Item Type:  
+                                <label class=" text-warning display-7"> Item Type:  
                                 </label>
                                 {{ $data->itemType }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Model Year:  
+                                <label class=" text-warning display-7"> Model Year:  
                                 </label>
                                 {{ $data->modelYear }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> CC:  
+                                <label class=" text-warning display-7"> CC:  
                                 </label>
                                 {{ $data->cc }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Cylinder:  
+                                <label class=" text-warning display-7"> Cylinder:  
                                 </label>
                                 {{ $data->cylinder }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> No of Gears:  
+                                <label class=" text-warning display-7"> No of Gears:  
                                 </label>
                                 {{ $data->noOfGears }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Mileage:  
+                                <label class=" text-warning display-7"> Mileage:  
                                 </label>
                                 {{ $data->mileage }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Front Brake:  
+                                <label class=" text-warning display-7"> Front Brake:  
                                 </label>
                                 {{ $data->frontBrake }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Rear Brake:  
+                                <label class=" text-warning display-7"> Rear Brake:  
                                 </label>
                                 {{ $data->rearBrake }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Fuel Type:  
+                                <label class=" text-warning display-7"> Fuel Type:  
                                 </label>
                                 {{ $data->fuelType }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> ABS:  
+                                <label class=" text-warning display-7"> ABS:  
                                 </label>
                                 {{ $data->ABS }}
                                 </h6>
 
                                 <h6 class="card-title mbr-fonts-style">
-                                <label class=" text-warning display-4"> Description:  
+                                <label class=" text-warning display-7"> Description:  
                                 </label>
                                 {{ $data->description }}
                                 </h6>
@@ -224,6 +227,7 @@
                                 <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
                             </td>
 
+                            @if($data->status=="NO")
                             <td class="pt-4">
                                 <form method="post" id="formRemove" action="{{url('/expiredBooking',$data->bookingId)}}">
                                     @csrf
@@ -233,6 +237,31 @@
                                     </button>
                                 </form>
                             </td>
+
+                            <td>
+                                    
+                                <form method="post" action="{{url('/confirmOrder', $data->bookingId)}}">
+                                    @csrf
+                                    <button class="mt-3 btnConfirm" onclick="if (!confirm('Are you sure to order this item?')) { return false }" type="submit">
+                                            Confirm order
+                                    </button>
+                                </form>
+                            </td>
+
+                            @else
+
+                            <td>
+                                <button class="mt-3" style="font-size: 20px; border-radius: 20px;" disabled>
+                                        <span class="mbri-trash"></span>
+                                </button>
+                            </td>
+
+                            <td>
+                                <button class="mt-3" style="border-radius: 20px;"  disabled>
+                                    Ordered
+                                </button>
+                            </td>
+                            @endif
                         </tr>
                     @endforeach
                     @else

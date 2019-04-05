@@ -47,11 +47,42 @@ table
 
 .deleteIcon
 {
-	font-size: 30px;
-	background-color: #EE4141;
+	font-size: 20px;
+	color: #CE4907;
+	border-radius: 20px;
 }
 
 .deleteIcon:hover
 {
-	font-size: 35px;
+	background-color: #EE4141;
+	color: white;
+}
+
+.btnConfirm
+{
+	color: #157106;
+	border-radius: 20px;
+}
+
+.btnConfirm:hover
+{
+	background-color: #71D434;
+	color: white;
+}
+
+.invoice-head td {
+  padding: 0 8px;
+}
+.container {
+  padding-top:30px;
+}
+.invoice-body{
+  background-color:transparent;
+}
+.invoice-thank{
+  margin-top: 60px;
+  padding: 5px;
+}
+address{
+  margin-top:15px;
 }

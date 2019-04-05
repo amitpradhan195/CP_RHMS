@@ -29,17 +29,17 @@ Route::get('/userDash', function (){
 
 Route::get('/bookings', 'BookingController@show')->middleware('auth');
 
-Route::get('/gallery', function (){
-	return view('gallery');
-});
+// Route::get('/gallery', function (){
+// 	return view('gallery');
+// });
 
 Route::get('/aboutUs', function(){
 	return view('aboutUs');
 });
 
-Route::get('/billing', function (){
-	return view('billing');
-})->middleware('auth');
+// Route::get('/billing', function (){
+// 	return view('billing');
+// })->middleware('auth');
 
 Route::get('/addItem', 'AddItemTypeController@show');
 
@@ -67,11 +67,16 @@ Route::get('/addBooking/{id}', 'BookingController@index');
 
 Route::put('/addBooking/{id}', 'BookingController@store')->middleware('auth');
 
-Route::get('/expiredBooking/{id}', 'BookingController@create');
-
 Route::put('/expiredBooking/{id}', 'BookingController@destroy');
 
 Route::get('/editItem', 'AddItemController@edit');
 
 Route::put('/itemUpdate', 'AddItemController@update');
 
+Route::delete('/itemDelete/{id}', 'AddItemController@destroy');
+
+Route::get('/gallery', 'AddItemTypeController@index');
+
+Route::get('/billing', 'BillingController@show');
+
+Route::post('/confirmOrder/{id}', 'BillingController@create');

@@ -117,6 +117,11 @@
       {
         alert(msg);
       }
+
+      if ('{{Session::has('bookingExists')}}') 
+      {
+        alert('{{Session::get('bookingExists')}}');
+      }
     </script>
 
 <section class="mbr-section form3 cid-rggij9RQ25" id="form3-1c">

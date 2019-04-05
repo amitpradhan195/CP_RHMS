@@ -28,7 +28,7 @@ class BookingController extends Controller
      */
     public function create($id)
     {
-        return redirect()->to('/bookings');
+        //
     }
 
     /**
@@ -39,15 +39,26 @@ class BookingController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $booking = new Booking;
+        $checkBoking = DB::table('tbl_booking')->where('itemId', $id)->where('userId', $request->userId)->get();
 
-        $booking->bookingDate = (Carbon\Carbon::now('Asia/Kathmandu')->toDateTimeString('Y-m-d H:i'));
-        $booking->expireDate = (Carbon\Carbon::now('Asia/Kathmandu')->addHours(48)->toDateTimeString('Y-m-d H:i'));
-        $booking->userId = $request->userId;
-        $booking->itemId = $id;
+        if(count($checkBoking)>0)
+        {
+            return back()->with('bookingExists', 'You have already booked this item');
+        }
 
-        $booking->save();
-        return redirect()->to('/products')->with('bookingSuccess', 'Your booking is successful');
+        else
+        {
+            $booking = new Booking;
+
+            $booking->bookingDate = (Carbon\Carbon::now('Asia/Kathmandu')->toDateTimeString('Y-m-d H:i'));
+            $booking->expireDate = (Carbon\Carbon::now('Asia/Kathmandu')->addHours(48)->toDateTimeString('Y-m-d H:i'));
+            $booking->userId = $request->userId;
+            $booking->itemId = $id;
+            $booking->status = "NO";
+
+            $booking->save();
+            return redirect()->to('/products')->with('bookingSuccess', 'Your booking is successful');
+        } 
     }
 
     /**

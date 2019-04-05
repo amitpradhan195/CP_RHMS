@@ -11,6 +11,7 @@
   <title>Billing</title>
   <link rel="stylesheet" href="{{url('assets/web/assets/icons2/mobirise2.css') }}" />
   <link rel="stylesheet" href="{{url('assets/web/assets/icons/mobirise-icons.css') }}" />
+  <link rel="stylesheet" href="{{url('assets/web/assets/icons-bold/mobirise-icons-bold.css') }}">
   <link rel="stylesheet" href="{{url('assets/tether/tether.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap.min.css') }}" />
   <link rel="stylesheet" href="{{url('assets/bootstrap/css/bootstrap-grid.min.css') }}" />
@@ -50,36 +51,46 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="userDash"><span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="gallery"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Gallery</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
-                </li>
+
                 <li class="nav-item"> 
                     <a class="nav-link link text-warning display-4" href="products"><span class="mbri-contact-form mbr-iconfont mbr-iconfont-btn"></span>Products</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                </ul>
 
-                <li class="nav-item">
-                    <a class="link display-5" href="{{url('editProfile') }}" style="color: #d2cf09 "> {{ Auth::user()->username }} </a>
-                </li>
-
-            </ul>
-
-            <div class="navbar-buttons mbr-section-btn">
-                <a class="btn btn-sm btn-primary-outline display-4" href="{{ route('logout') }}" 
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="mbrib-logout mbr-iconfont mbr-iconfont-btn"></span>
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-            </div>
-          </div>
+            <div class="btn-group">
+             <span class="mbrib-user mbr-iconfont mbr-iconfont-btn display-5"></span>&nbsp
+             <a class="display-4 pt-1 text-warning dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}
+             </a>
+             <ul class="dropdown-menu">
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{url('editProfile')}}">EditProfile
+                          </a>
+                    </li>
+                    <li>
+                          <a class="mbr-text pl-5 text-warning mbr-fonts-style display-7" href="{{ route('logout') }}" 
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                    </li>
+             </ul>                 
+            </div> 
+        </div>
     </nav>
 </section>
 
@@ -87,7 +98,7 @@
 
 <section class="section-table cid-rhn6BvzEIr" id="table1-2a">
 
-  <div class="container container-table">
+  <div class="container container-table" media="print">
       <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
           Billing</h2>
       <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
@@ -106,24 +117,127 @@
         </div>
 
         <div class="container scroll">
-          <table class="table isSearch" cellspacing="0">
+          <table class="table isSearch table-hover" cellspacing="0">
             <thead>
-              <tr class="table-heads ">
+              <tr class="table-heads text-center">
+              <th class="head-item mbr-fonts-style display-7">S. No</th>
               <th class="head-item mbr-fonts-style display-7">Item Name</th>
-              <th class="head-item mbr-fonts-style display-7">Rate</th>
-              <th class="head-item mbr-fonts-style display-7">Qty</th>
-              <th class="head-item mbr-fonts-style display-7">Total</th></tr>
+              <th class="head-item mbr-fonts-style display-7">Price</th>
+              <th class="head-item mbr-fonts-style display-7">Image</th>
+              <th class="head-item mbr-fonts-style display-7">Confirmed Date</th>
+              <th class="head-item mbr-fonts-style display-7">Print</th>
+            </tr>
             </thead>
 
-            <tbody>
-            <tr> 
-              <td class="body-item mbr-fonts-style display-7">Item 1</td>
-              <td class="body-item mbr-fonts-style display-7">44</td>
-              <td class="body-item mbr-fonts-style display-7">2</td>
-              <td class="body-item mbr-fonts-style display-7">88</td>
-            </tr>
+            <tbody style="font-size: 16px;">
+              @if(isset($billingDetails))
+              @if($billingDetails->count()>0)
+                    @foreach($billingDetails as $data) 
+              <tr class="text-center" style="font-family: palatino;">
+                            <td class="counterCell"></td>
+              <td class="body-item mbr-fonts-style">
+                {{$data->modelName}} &nbsp &nbsp
+                            <a class="viewInfo" style="font-family: 'Arial'; font-size: 12px;" data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View more</a>
 
-            <tr>    
+                            <div id="{{ $data->itemId}}" class="panel-collapse collapse in">
+                                <hr>
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Brand:  
+                                </label>
+                                {{ $data->brand }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Item Type:  
+                                </label>
+                                {{ $data->itemType }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Model Year:  
+                                </label>
+                                {{ $data->modelYear }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> CC:  
+                                </label>
+                                {{ $data->cc }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Cylinder:  
+                                </label>
+                                {{ $data->cylinder }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> No of Gears:  
+                                </label>
+                                {{ $data->noOfGears }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Mileage:  
+                                </label>
+                                {{ $data->mileage }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Front Brake:  
+                                </label>
+                                {{ $data->frontBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Rear Brake:  
+                                </label>
+                                {{ $data->rearBrake }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Fuel Type:  
+                                </label>
+                                {{ $data->fuelType }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> ABS:  
+                                </label>
+                                {{ $data->ABS }}
+                                </h6>
+
+                                <h6 class="card-title mbr-fonts-style">
+                                <label class=" text-warning"> Description:  
+                                </label>
+                                {{ $data->description }}
+                                </h6>
+                            </div>
+              </td>
+              <td class="body-item mbr-fonts-style">{{ $data->price }}</td>
+              <td class="body-item mbr-fonts-style">
+                <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
+              </td>
+              <td class="body-item mbr-fonts-style">{{date('Y-m-d h:ia', strtotime($data->billDateTime))}}</td>
+              <td class="body-item mbr-fonts-style" style="font-size: 30px;"><a class="mbri-print printIcon" data-target="#modalReceipt" data-toggle="modal"></a></td>
+            </tr>
+            <!-- onclick="window.print();return false;" -->
+            @endforeach
+            @else
+                        <tr style="font-family: palatino;">
+                            <td> No items has been booked.</td>
+                        </tr>
+                        @endif
+                        @endif
+                        <style type="text/css">
+                          .printIcon:hover
+                          {
+                            font-size: 36px;
+                          }
+                        </style>
+
+
+           <!--  <tr>    
               <td class="body-item mbr-fonts-style display-7">Item 2</td>
               <td class="body-item mbr-fonts-style display-7">35</td>
               <td class="body-item mbr-fonts-style display-7">4</td>
@@ -135,14 +249,14 @@
               <td class="body-item mbr-fonts-style display-7">66</td>
               <td class="body-item mbr-fonts-style display-7">1</td>
               <td class="body-item mbr-fonts-style display-7">66</td>
-            </tr>
+            </tr> -->
 
-            <tr>  
+            <!-- <tr>  
               <td class="body-item mbr-fonts-style display-7">Item 4</td>
               <td class="body-item mbr-fonts-style display-7">70</td>
               <td class="body-item mbr-fonts-style display-7">7</td>
               <td class="body-item mbr-fonts-style display-7">490</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -263,7 +377,7 @@
   <script src="{{ url('assets/dropdown/js/script.min.js') }}"></script>
   <script src="{{ url('assets/theme/js/script.js') }}"></script>
   
-   <div class="modal fade " id="modalLogin">
+<!--    <div class="modal fade " id="modalLogin">
   <div class="modal-dialog modal-dialog-center modal-sm">
     <div class="modal-content ">
      <div class="modal-header">
@@ -293,7 +407,7 @@
         <br>
     </div>
   </div>
-</div>
+</div> -->
 
 <script>
 $(document).ready(function(){
@@ -309,94 +423,95 @@ $(document).ready(function(){
   });
 </script>
 
-<div class="modal fade" id="modalSignup">
-  <div class="modal-dialog modal-dialog-center modal-md">
+<div class="modal fade" id="modalReceipt">
+  <div class="modal-dialog modal-dialog-center modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="text-center text-danger" id="titleSignup"> SignUp </h1>
-        <img src="addUser.png" alt="Logo" style="width:60px;">
+        <img src="assets/images/motorbikelogo-96x96.png" alt="bikeLogo" title="" style="height: 3.8rem;">
+        <br>
+        <h4 class="text-center text-danger" id="titleSignup"> Recondition House Management System </h4>
+        <!-- <img src="addUser.png" alt="Logo" style="width:60px;"> -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body" id="scrollSignup">
-          <form method="post">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
-              </div>
-              <input type="text" id="inputFullname" name="fullname" class="form-control" placeholder="Full Name" required>
-            </div>
-            <br>
-            <div class="form-group row">
-              <label class="col-sm-2 font-weight-bold text-secondary">Gender: </label>
-              <div class="col-sm-10">
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optMale" value="Male">
-                      <label class="form-check-label" for="optMale">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optFemale" value="Female">
-                      <label class="form-check-label" for="optFemale">Female</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="gender" id="optOthers" value="Others">
-                      <label class="form-check-label" for="optOthers">Others</label>
-                  </div>
-              </div>
-            </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marker-alt"></i> </span>
-              </div>
-              <input type="text" id="inputAddress" name="postalAddress" class="form-control" placeholder="Postal Address" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-map-marked-alt"></i> </span>
-              </div>
-              <input type="text" id="inputPostalCode" name="postalCode" class="form-control" placeholder="Postal Code" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="far fa-calendar-alt"></i> </span>
-              </div>
-              <input type="date" id="inputDob" name="dob" class="form-control"  required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="far fa-envelope"></i></span>
-              </div>
-              <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user-alt"></i> </span>
-              </div>
-              <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i> </span>
-              </div>
-              <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-            </div>
-            <br>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-key"></i> </span>
-              </div>
-              <input type="password" id="inputRetype" name="retype" class="form-control" placeholder="Re-type Password" required>
-            </div>
-            <br>
-            <button class="btn btn-primary btn-lg mx-3" name="btnSignup" type="submit">Sign Up</button>
-            <a class="text-center text-primary mt-2" id="linkLogin" data-target="#modalLogin" data-toggle="modal">I already have an account</a>
-          </form>
+      <div class="row">
+        <div class="span4">
+                <img src="//placehold.it/170x40" class="img-rounded logo ml-3">
+          <address class="ml-3">
+              <strong>ACME, Inc.</strong><br>
+              P.O Box 3171<br>
+              Kent, WA 98089<br>
+          </address>
         </div>
+        <div class="align-right">
+          <table class="invoice-head">
+            <tbody>
+              <tr>
+                <td class="pull-right"><strong>Customer #</strong></td>
+                <td>21398324797234</td>
+              </tr>
+              <tr>
+                <td class="pull-right"><strong>Invoice #</strong></td>
+                <td>2340</td>
+              </tr>
+              <tr>
+                <td class="pull-right"><strong>Date</strong></td>
+                <td>10-08-2013</td>
+              </tr>
+              <tr>
+                <td class="pull-right"><strong>Period</strong></td>
+                          <td>9/1/2103 - 9/30/2013</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8">
+          <h2>Invoice</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8 well invoice-body">
+          <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Service request</td>
+            <td>10/8/2013</td>
+            <td>$1000.00</td>
+            </tr><tr>
+              <td>&nbsp;</td>
+              <td><strong>Total</strong></td>
+              <td><strong>$1000.00</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8 well invoice-thank">
+          <h5 style="text-align:center;">Thank You!</h5>
+        </div>
+      </div>
+      <div class="row">
+          <div class="span3">
+              <strong>Phone:</strong> <a href="tel:555-555-5555">555-555-5555</a>
+          </div>
+          <div class="span3">
+              <strong>Email:</strong> <a href="mailto:hello@5marks.co">hello@bootply.com</a>
+          </div>
+          <div class="span3">
+              <strong>Website:</strong> <a href="http://5marks.co">http://bootply.com</a>
+          </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>

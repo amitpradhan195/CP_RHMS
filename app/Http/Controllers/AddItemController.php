@@ -145,8 +145,8 @@ class AddItemController extends Controller
 
             if(addItem::where('img', '=', $picUrl)->exists()) 
             {
-                return redirect('/addItem')->with('itemNameExists','Please!!insert image with another name');
-            }
+                return redirect('/updateItem')->with('itemNameExists','Please!!insert image with another name');
+            }   
 
             else{
                 DB::table('tbl_items')
@@ -176,8 +176,19 @@ class AddItemController extends Controller
      * @param  \App\addItem  $addItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(addItem $addItem)
+    public function destroy(addItem $addItem, $id)
     {
-        //
+        $checkBook = DB::table('tbl_booking')->where('itemId',$id)->get();
+            if(count($checkBook)>0)
+            {
+                return back()->with('errorBooked', 'Item has been booked by the users'); 
+            }
+
+            else{
+                $delItems = DB::table('tbl_items')->where('itemId', $id)->delete();
+
+                return redirect()->to('/updateItem')->with('delSuccess', 'Item deleted successfully');  
+            }
+                  
     }
 }

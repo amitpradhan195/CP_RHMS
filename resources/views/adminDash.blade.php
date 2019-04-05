@@ -68,6 +68,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="/addItem"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>Add Item</a>
+                </li> 
+
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-gift mbr-iconfont mbr-iconfont-btn"></span>Edit Item</a>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="updateItem"><span class="mobi-mbri mobi-mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>View Bookings</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
             </ul>
 
@@ -110,15 +118,9 @@
                 <div class="mbr-section-btn">
                     <a class="btn btn-md btn-primary-outline display-4" href="/addItem">Add Items<br>
                     </a> 
-                    <a class="btn btn-md btn-primary-outline display-4" href="/updateItem">Update Items<br>
-                    </a>
-                    <a class="btn btn-md btn-primary-outline display-4" href="#">Delete Items<br>
-                    </a>
-                    <a class="btn btn-md btn-primary-outline display-4" href="#">View Items<br>
+                    <a class="btn btn-md btn-primary-outline display-4" href="/updateItem">Edit and View Items<br>
                     </a>
                     <a class="btn btn-md btn-primary-outline display-4" href="#">View Bookings<br>
-                    </a>
-                    <a class="btn btn-md btn-primary-outline display-4" href="#">View Customers<br>
                     </a>
                 </div>
             </div>
