@@ -64,6 +64,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="billing" aria-expanded="false"><span class="mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span>Orders</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                 </ul>
@@ -257,9 +261,10 @@
                             </td>
 
                             <td>
-                                <button class="mt-3" style="border-radius: 20px;"  disabled>
-                                    Ordered
-                                </button>
+                                <form method="post" action="{{url('/cancelOrder', $data->bookingId)}}">
+                                    @csrf
+                                    <button class="mt-3" style="border-radius: 20px;">Cancel Order</button>
+                                </form>
                             </td>
                             @endif
                         </tr>

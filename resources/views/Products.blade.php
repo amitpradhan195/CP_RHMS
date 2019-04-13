@@ -68,7 +68,12 @@
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="billing" aria-expanded="false"><span class="mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span>Orders</a>
+                </li>
                 @endauth
+
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="aboutUs"><span class="mbri-italic mbr-iconfont mbr-iconfont-btn"></span>About Us</a>
                 </li>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
@@ -132,48 +137,40 @@
                 <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">Search for your choice<br></h3>
             </div>
         </div>
-
-        <div class="row py-2 justify-content-center">
-            <div class="col-12 col-lg-6  col-md-8 " data-form-type="formoid">
-                <form class="mbr-form" action="" method="post" data-form-title="Search Form">
-                    <div class="mbr-subscribe input-group">
-                            <div class="col-md-4">
-                              <select class="form-control">
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="all">All</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="dirt">Dirt</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="sport">Sport</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="cruiser">Cruiser</option>
-                              </select>
-                            </div>
-                        <input class="form-control col-lg-4" id="txt" type="text" name="searchBy" placeholder="Search">
-                        <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary display-4">Search</button></span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </section>
 
-<section class="services1 cid-rggNzMJlwj" id="services1-1h">
+<section class="" id="services1-1h">
 
     <!--Overlay-->
     
     <!--Container-->
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <!--Titles-->
-            <div class="title pb-5 col-12">
-                <h2 class="align-left pb-3 mbr-fonts-style display-1">
+            <div class="title pb-5 col-md-12">
+                <h2 class="align-left col-md-4 pb-3 mbr-fonts-style display-1">
                     Our Shop
                 </h2>
+                <div class="align-right" style="margin-top: -80px;">
+                <select class="col-lg-2 text-center" style="font-size: 20px;">
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="all">All</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="dirt">Dirt</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="sport">Sport</option>
+                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="cruiser">Cruiser</option>
+                              </select>
+                              
+                                  <input class="" id="txt" type="text" name="searchBy" placeholder="Search" style="font-size: 20px;">
+                                 
+                                    <button type="submit" class="btn btn-primary btn-sm display-4 mb-3" style="border-radius: 20px;"> <span class="mbri-search mr-2"></span>Search</button>
+                              </div>
                 
             </div>
             <!--Card-1-->
             @foreach ($itemDetails as $data) 
-            <div class="card col-12 col-md-6 col-lg-4">
+            <div class="card col-md-3" style="margin-left: 50px;">
                 <div class="card-wrapper">
                     <div class="card-img">
-                        <img src="/{{ $data->img }}" alt="bikeImg" title="">
+                        <img src="/{{ $data->img }}" alt="bikeImg" title="" height="170">
                     </div>
                     <div class="card-box pb-md-5">
                              <h4 class="card-title mbr-fonts-style display-5">{{ $data->modelName }}</h4>
@@ -275,7 +272,7 @@
                                 <input type="hidden" name="userId" value="{{Auth::user()->id}}"/>
                                 @endauth
                                     
-                                    <button onclick="if (!confirm('Are you sure to book this item?')) { return false }" type="submit" name="btnBook" class="btn btn-primary-outline display-4">
+                                    <button onclick="if (!confirm('Are you sure to book this item?')) { return false }" type="submit" name="btnBook" class="btn btn-primary-outline display-4" style="border-radius: 3rem;">
                                         NRs. {{$data->price}}</button>
                                     </div>
                                     </form>

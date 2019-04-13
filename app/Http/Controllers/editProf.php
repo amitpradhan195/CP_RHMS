@@ -78,9 +78,7 @@ class editProf extends Controller
      */
     public function edit($id)
     {
-
-        return view('editProfile');
-        // return view('editProfile/{id}');
+        //
     }
 
     /**

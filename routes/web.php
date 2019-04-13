@@ -53,8 +53,6 @@ Route::get('/editProfile', function (){
 	return view('editProfile');
 })->middleware('auth');
 
-Route::get('/editProfile/{id}', 'editProf@edit');
-
 Route::put('/updateProfile/{id}', 'editProf@update');
 
 Route::post('/addItemType','AddItemTypeController@create');
@@ -63,7 +61,7 @@ Route::put('/addedItem', 'AddItemController@create');
 
 Route::get('/products', 'AddItemController@show'); 
 
-Route::get('/addBooking/{id}', 'BookingController@index');
+// Route::get('/addBooking/{id}', 'BookingController@index');
 
 Route::put('/addBooking/{id}', 'BookingController@store')->middleware('auth');
 
@@ -77,6 +75,10 @@ Route::delete('/itemDelete/{id}', 'AddItemController@destroy');
 
 Route::get('/gallery', 'AddItemTypeController@index');
 
-Route::get('/billing', 'BillingController@show');
+Route::get('/billing', 'BillingController@show')->middleware('auth');
 
 Route::post('/confirmOrder/{id}', 'BillingController@create');
+
+Route::post('/cancelOrder/{id}','BillingController@edit');
+
+Route::get('/generateBill', 'BillingController@index');

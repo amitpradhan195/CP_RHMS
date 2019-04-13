@@ -115,7 +115,11 @@
 <h1 class="align-left mbr-fonts-style ml-3">List of Items</h1>
 <hr>
   <table class="table table-hover">
-    <h5 class="ml-3">Select the item you want to edit.</h5>
+    <div class="row col-md-12" style="float: left;">
+      <h5 class="ml-3">Select the item you want to edit.</h5>
+      <button class="btn btn-sm btn-primary-outline addItem">Add new Item</button>
+    </div>
+    
                 <thead class="text-center" style="background-color: #474646; color: white;">
                     <tr>
                         <th class="card-title mbr-fonts-style">S. No</th>
@@ -124,8 +128,7 @@
                         <th class="card-title mbr-fonts-style ">Items Type</th>
                         <th class="card-title mbr-fonts-style ">Price</th>
                         <th class="card-title mbr-fonts-style ">Image</th>
-                        <th class="card-title mbr-fonts-style ">Edit</th>
-                        <th class="card-title mbr-fonts-style ">Delete</th>
+                        <th class="card-title mbr-fonts-style ">Action</th>
                     </tr>
                 </thead>
                 <style type="text/css">
@@ -215,14 +218,11 @@
                             </td>
 
                             <td>
-                                <button class="btn btn-sm btn-danger-outline getIds" value="{{$data->itemId}}">Edit</button>
-                            </td>
-
-                            <td>
-                              <form method="post" action="{{url('/itemDelete', $data->itemId)}}">
-                                @csrf
-                                {{method_field('delete')}}
-                                <button class="btn btn-sm btn-danger-outline delItems" >Delete</button>
+                                <button class="btn btn-sm btn-primary getIds" value="{{$data->itemId}}">Edit</button>
+                                <form method="post" action="{{url('/itemDelete', $data->itemId)}}">
+                                  @csrf
+                                  {{method_field('delete')}}
+                                  <button class="btn btn-sm delItems" onclick="if (!confirm('Are you sure to delete this item?')) { return false }" >Delete</button>
                               </form>
                             </td>
 
@@ -239,14 +239,33 @@
 </section>
 
 <style type="text/css">
-  .delItems:hover
+  .delItems
   {
-    background-color: red;
+    background-color: #C8230C;
+    color: white;
   }
 
-  .getIds:hover
+  .form-control{
+        font-size: 0.8rem;
+      }
+
+  .getIds
   {
-    background-color: orange;
+    float: left;
+  }
+
+  .addItem
+  {
+    margin-left: 825px;
+    border-color: green;
+    background-color: transparent;
+  }
+
+  .addItem:hover
+  {
+    background-color: green;
+    border-color: green;
+    color: white;
   }
 </style>
 
@@ -259,7 +278,7 @@
           	@csrf
           	{{method_field('put')}}
 
-            <h1 class="text-center">Add Item</h1>
+            <h1 class="text-center">Edit Item</h1>
             <br>
             <h5 class="text-primary" align="left">Fill up all the details.</h5>
             <hr>
@@ -460,8 +479,8 @@
             <br>
 
             <br>
-            <button class="btn btn-primary btn-lg mx-3" id="btnEdit" name="btnEdit" type="submit">Edit</button>
-            <button class="btn btn-warning btn-lg mx-3" name="btnCancel" type="button" id="btnCancel">Cancel</button>
+            <button class="btn btn-primary" id="btnEdit" name="btnEdit" type="submit" style="font-size: 14px;">Edit</button>
+            <button class="btn btn-warning" name="btnCancel" type="button" id="btnCancel" style="font-size: 14px;">Cancel</button>
           </form>
           
           <br>
@@ -491,7 +510,6 @@
                      $("#formEditProf").show();
                     console.log(data);
                     $('#itemId').val(data[0].itemId);
-                    // $('select[name="itemType"]').find('option[value="'+data[0].itemTypeId+'"]').attr("selected",true);
                     $("#itemType").val(data[0].itemTypeId).change();
                     $('#inputBrand').val(data[0].brand);
                     $('#inputModelName').val(data[0].modelName);
@@ -499,13 +517,9 @@
                     $('#inputCylinder').val(data[0].cylinder);
                     $('#inputNoOfGears').val(data[0].noOfGears);
                     $('#inputMileage').val(data[0].mileage);
-                    // $('select[name="frontBrake"]').find('option[value="'+data[0].frontBrake+'"]').attr("selected",true);
                     $("#frontBrake").val(data[0].frontBrake).change();
-                    // $('select[name="rearBrake"]').find('option[value="'+data[0].rearBrake+'"]').attr("selected",true);
                     $("#rearBrake").val(data[0].rearBrake).change();
-                    // $('select[name="ABS"]').find('option[value="'+data[0].ABS+'"]').attr("selected",true);
                     $("#ABS").val(data[0].ABS).change();
-                    // $('select[name="fuelType"]').find('option[value="'+data[0].fuelType+'"]').attr("selected",true);
                     $("#fuelType").val(data[0].fuelType).change();
                     $('#inputPrice').val(data[0].price);
                     $("#uploadPreview").attr("src", data[0].img);
@@ -528,30 +542,6 @@
 
 <br>
 </section>
-
-
-<script>
-      var msg = '{{Session::get('success')}}';
-      var exist = '{{Session::has('success')}}';
-      if(exist)
-      {
-        alert(msg);
-      }
-
-      if('{{Session::has('updatedItem')}}')
-      {
-        alert('{{Session::get('updatedItem')}}');
-      }
-</script>
-
-<script>
-      var msg = '{{Session::get('fail')}}';
-      var exist = '{{Session::has('fail')}}';
-      if(exist)
-      {
-        alert(msg);
-      }
-</script>
 
 
   <script src="{{url('assets/web/assets/jquery/jquery.min.js') }}"></script>

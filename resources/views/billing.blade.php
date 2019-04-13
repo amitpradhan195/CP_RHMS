@@ -26,8 +26,8 @@
 
 </head>
 <body>
-  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-29" data-rv-view="618">
-  <section class="menu cid-rgarQyhyTr" once="menu" id="menu1-29">
+  <link rel="stylesheet" href="style.less" class="cid-rgarQyhyTr" id="menu1-14" data-rv-view="826">
+  <section class="menu cid-rgarQyhyTr" once="menu" id="menu1-14">
 
    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +62,10 @@
 
                 <li class="nav-item">
                     <a class="nav-link link text-warning display-4" href="bookings" aria-expanded="false"><span class="mbri-cart-full mbr-iconfont mbr-iconfont-btn"></span>Bookings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link link text-warning display-4" href="billing" aria-expanded="false"><span class="mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span>Orders</a>
                 </li>
 
                 <li class="nav-item">
@@ -103,14 +107,14 @@
           Billing</h2>
       <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
             Recondition House Management System</h3>
-      <div class="table-wrapper">
+      <div class="table-wrapper" style="margin-top: -100px;">
         <div class="container">
           <div class="row search">
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <div class="dataTables_filter">
-                  <label class="searchInfo mbr-fonts-style display-7">Date</label>
-                  <input class="form-control input-sm" disabled="">
+                  <label class="searchInfo mbr-fonts-style display-7">Search</label>
+                  <input class="form-control input-sm">
                 </div>
             </div>
           </div>
@@ -134,7 +138,7 @@
               @if($billingDetails->count()>0)
                     @foreach($billingDetails as $data) 
               <tr class="text-center" style="font-family: palatino;">
-                            <td class="counterCell"></td>
+              <td class="counterCell"></td>
               <td class="body-item mbr-fonts-style">
                 {{$data->modelName}} &nbsp &nbsp
                             <a class="viewInfo" style="font-family: 'Arial'; font-size: 12px;" data-toggle="collapse" data-parent="#accordion" href="#{{$data->itemId}}">View more</a>
@@ -219,22 +223,25 @@
                 <img src="/{{$data->img}}" style="height: 120px; width: 200px;">
               </td>
               <td class="body-item mbr-fonts-style">{{date('Y-m-d h:ia', strtotime($data->billDateTime))}}</td>
-              <td class="body-item mbr-fonts-style" style="font-size: 30px;"><a class="mbri-print printIcon" data-target="#modalReceipt" data-toggle="modal"></a></td>
+              <td class="body-item mbr-fonts-style" style="font-size: 30px;">
+                <!-- <a class="mbri-print printIcon" data-target="#modalReceipt" data-toggle="modal"></a> -->
+                <button class="mbri-print printIcon mt-4 btn-primary-outline genBill" value="{{$data->bookId}}"></button>
+              </td>
             </tr>
             <!-- onclick="window.print();return false;" -->
             @endforeach
             @else
                         <tr style="font-family: palatino;">
-                            <td> No items has been booked.</td>
+                            <td> No items has been ordered.</td>
                         </tr>
-                        @endif
-                        @endif
-                        <style type="text/css">
-                          .printIcon:hover
-                          {
-                            font-size: 36px;
-                          }
-                        </style>
+              @endif
+            @endif
+            <style type="text/css">
+              .printIcon:hover
+              {
+                font-size: 36px;
+              }
+            </style>
 
 
            <!--  <tr>    
@@ -423,98 +430,199 @@ $(document).ready(function(){
   });
 </script>
 
+
+<script src="{{ asset('js/app.js') }}"></script>
+      <script>
+         $(document).ready(function(){
+          // $("#formEditProf").hide();
+            $('.genBill').click(function(e){
+              e.preventDefault();
+              var id = jQuery(this).val();
+
+              var resp=$.ajax({
+                  url: "{{ URL('/generateBill') }}",
+                  method: 'GET',
+                  datatype : 'json',
+                  data: {
+                     id : id
+                  },
+                  success: function(response){
+                    var data=JSON.parse(response);
+                    $("#modalReceipt").modal("show");
+                    $('#fullName').text((data[0].firstName +'  '+ data[0].lastName ).toUpperCase());
+                    $('#billId').text(data[0].billId);
+                    $('#contact').text(data[0].contactNo);
+                    $('#address').text(data[0].address);
+                    $("#image").attr("src", data[0].img);
+                    $('#modelName').text(data[0].modelName);
+                    $('#orderDate').text(data[0].billDateTime);
+                    $('#price').text(data[0].price);
+                    $('#tot').text(data[0].price);
+                    console.log(data);
+                    }     
+                });
+               });
+
+            // $("#addrows").click(function () {
+            //      $("#mytable").each(function () {
+            //          $(this).closest('table').find('tr:last').prev().after('<tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>');
+            //      });
+            // });
+            });
+      </script>
+
+      <style type="text/css">
+        input {
+            border: transparent;
+        }
+      </style>
+
 <div class="modal fade" id="modalReceipt">
   <div class="modal-dialog modal-dialog-center modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <img src="assets/images/motorbikelogo-96x96.png" alt="bikeLogo" title="" style="height: 3.8rem;">
-        <br>
+        <img src="assets/images/motorbikelogo-96x96.png" alt="bikeLogo" title="" style="height: 2rem;"> &nbsp &nbsp
         <h4 class="text-center text-danger" id="titleSignup"> Recondition House Management System </h4>
-        <!-- <img src="addUser.png" alt="Logo" style="width:60px;"> -->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body" id="scrollSignup">
       <div class="row">
         <div class="span4">
-                <img src="//placehold.it/170x40" class="img-rounded logo ml-3">
-          <address class="ml-3">
-              <strong>ACME, Inc.</strong><br>
+                <img id="image" src="" class="img-rounded logo ml-5" height="150" style="border: 2px solid black;">
+          <address class="ml-5">
+              <strong>RHMS, Inc.</strong><br>
               P.O Box 3171<br>
-              Kent, WA 98089<br>
+              Sanagaun, Siddhipur<br>
+              Lalitpur <br>
           </address>
         </div>
-        <div class="align-right">
+        <div class="align-right mt-2" style="margin-left: 200px;">
           <table class="invoice-head">
             <tbody>
               <tr>
-                <td class="pull-right"><strong>Customer #</strong></td>
-                <td>21398324797234</td>
+                <td class="pull-right"><strong>Customer Name:</strong></td>
+                <td id="fullName" class="align-left"></td>
               </tr>
               <tr>
-                <td class="pull-right"><strong>Invoice #</strong></td>
-                <td>2340</td>
+                <td class="pull-right"><strong>Invoice no:</strong></td>
+                <td id="billId" class="align-left"></td>
               </tr>
               <tr>
-                <td class="pull-right"><strong>Date</strong></td>
-                <td>10-08-2013</td>
+                <td class="pull-right"><strong>Date:</strong></td>
+                <td class="align-left">{{(Carbon\Carbon::today()->format('Y-m-d'))}}</td>
               </tr>
               <tr>
-                <td class="pull-right"><strong>Period</strong></td>
-                          <td>9/1/2103 - 9/30/2013</td>
+                <td class="pull-right"><strong>Contact no:</strong></td>
+                <td id="contact" class="align-left"></td>
+              </tr>
+              <tr>
+                <td class="pull-right"><strong>Address:</strong></td>
+                <td id="address" class="align-left"></td>
               </tr>
             </tbody>
           </table>
         </div>
+    </div>
       </div>
       <div class="row">
-        <div class="span8">
+        <div class="span8 ml-5">
           <h2>Invoice</h2>
+          <!-- <button id="addrows"> Add Others</button> -->
         </div>
       </div>
-      <div class="row">
-        <div class="span8 well invoice-body">
-          <table class="table table-bordered">
-          <thead>
+      <div class="row col-md-12 align-center">
+        <div class="span8 well invoice-body col-md-12 align-center">
+          <table class="table">
+          <thead class="bg-dark mbr-white">
             <tr>
               <th>Description</th>
-              <th>Date</th>
+              <th>Order Date</th>
               <th>Amount</th>
             </tr>
           </thead>
           <tbody>
           <tr>
-            <td>Service request</td>
-            <td>10/8/2013</td>
-            <td>$1000.00</td>
-            </tr><tr>
+            <td id="modelName"></td>
+            <td id="orderDate"></td>
+            <td id="price"></td>
+            </tr>
+            <tr>
               <td>&nbsp;</td>
               <td><strong>Total</strong></td>
-              <td><strong>$1000.00</strong></td>
+              <td><strong id="tot"></strong></td>
             </tr>
           </tbody>
         </table>
         </div>
       </div>
-      <div class="row">
-        <div class="span8 well invoice-thank">
-          <h5 style="text-align:center;">Thank You!</h5>
-        </div>
+        <div class="align-right col-md-12">
+          <button id="btnPrint" type="button" class="btn btn-primary"><span class="mbri-print" style="font-size: 20px;"></span><div> &nbsp&nbspPrint</div></button>
       </div>
-      <div class="row">
-          <div class="span3">
-              <strong>Phone:</strong> <a href="tel:555-555-5555">555-555-5555</a>
-          </div>
-          <div class="span3">
-              <strong>Email:</strong> <a href="mailto:hello@5marks.co">hello@bootply.com</a>
-          </div>
-          <div class="span3">
-              <strong>Website:</strong> <a href="http://5marks.co">http://bootply.com</a>
+      <div class="text-center">
+        <!-- <div class="span8 well invoice-thank text-center"> -->
+          <h5>Thank You!</h5>
+        <!-- </div> -->
+      </div>
+      <div class="row ml-4">
+          <div class="span3" align="left">
+              <strong>Phone:</strong> <a href="tel:9845464232">9845464232</a>
+          </div>&nbsp &nbsp &nbsp &nbsp
+          <div class="span3 ml-5" align="center">
+              <strong>Email:</strong> <a href="mailto:amitpradhan195@gmail.com">amitpradhan195@gmail.com</a>
+          </div>&nbsp &nbsp &nbsp &nbsp
+          <div class="span3 ml-5 align-right">
+              <strong>Website:</strong> <a href="/userDash">http://rhms.com</a>
           </div>
       </div>
     </div>
     </div>
   </div>
 </div>
+
+<style type="text/css">
+  @media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
+</style>
+
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript">
+  document.getElementById("btnPrint").onclick = function () {
+    printElement(document.getElementById("modalReceipt"));
+}
+
+function printElement(elem) {
+    var domClone = elem.cloneNode(true);
+    
+    var $printSection = document.getElementById("printSection");
+    
+    if (!$printSection) {
+        var $printSection = document.createElement("div");
+        $printSection.id = "printSection";
+        document.body.appendChild($printSection);
+    }
+    
+    $printSection.innerHTML = "";
+    $printSection.appendChild(domClone);
+    window.print();
+}
+</script>
   
 </body>
 </html>

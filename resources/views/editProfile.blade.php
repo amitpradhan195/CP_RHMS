@@ -91,6 +91,13 @@
     </nav>
 </section>
 
+<style type="text/css">
+  .form-control
+  {
+    font-size: 12px;
+  }
+</style>
+
 
 
 <section id="editProfBody">
@@ -151,7 +158,7 @@
             <br>
 
             <div class="form-group row">
-              <label class="col-sm-3 font-weight-bold text-md text-primary">Gender: </label>
+              <label class="col-sm-3 font-weight-bold text-md">Gender: </label>
               <div class="col-sm-6">
                   <div class="form-check form-check-inline">
                       <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optMale" value="Male" @if(Auth::user()->Gender == 'Male') checked="checked" @endif />
@@ -231,8 +238,8 @@
             <br>
 
             <br>
-            <button class="btn btn-danger btn-lg mx-3" name="btnUpdate" type="submit">Update</button>
-            <button class="btn btn-primary btn-lg mx-3" name="btnCancel" type="submit">Cancel</button>
+            <button class="btn btn-danger btn-md mx-3" name="btnUpdate" type="submit">Update</button>
+            <button class="btn btn-primary btn-md mx-3" name="btnCancel" type="button">Cancel</button>
           </form>
 
           <br>
