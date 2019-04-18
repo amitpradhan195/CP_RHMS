@@ -29,17 +29,9 @@ Route::get('/userDash', function (){
 
 Route::get('/bookings', 'BookingController@show')->middleware('auth');
 
-// Route::get('/gallery', function (){
-// 	return view('gallery');
-// });
-
 Route::get('/aboutUs', function(){
 	return view('aboutUs');
 });
-
-// Route::get('/billing', function (){
-// 	return view('billing');
-// })->middleware('auth');
 
 Route::get('/addItem', 'AddItemTypeController@show');
 
@@ -82,3 +74,8 @@ Route::post('/confirmOrder/{id}', 'BillingController@create');
 Route::post('/cancelOrder/{id}','BillingController@edit');
 
 Route::get('/generateBill', 'BillingController@index');
+
+Route::get('/searchItem', 'AddItemController@search');
+
+Route::get('/txtSearch', 'AddItemController@txtSearch');
+

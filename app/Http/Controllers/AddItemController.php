@@ -79,6 +79,78 @@ class AddItemController extends Controller
         //
     }
 
+    public function txtSearch(Request $request)
+    {
+        if(is_null($request->searchText))
+        {
+            if(is_null($request->categories))
+            {
+                $itemDetails=DB::table('tbl_items')
+                ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                ->get();
+            }
+
+            else
+            {
+                $itemDetails=DB::table('tbl_items')
+                ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                ->where('tbl_items.itemTypeId',$request->categories)
+                ->get();   
+            }
+        }
+
+        elseif(is_null($request->categories))
+        {
+            if(is_null($request->searchText))
+            {
+                $itemDetails=DB::table('tbl_items')
+                ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                ->get();
+            }
+            
+            else
+            {
+                $itemDetails=DB::table('tbl_items')
+                ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+                ->where('tbl_items.modelName', 'LIKE','%'.$request->searchText.'%')
+                ->orWhere('tbl_items.brand', 'LIKE','%'.$request->searchText.'%')
+                ->get(); 
+            }
+        }
+
+        else
+        {
+           $itemDetails=DB::table('tbl_items')
+            ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+            ->where('tbl_items.itemTypeId',$request->categories)
+            ->where('tbl_items.modelName', 'LIKE','%'.$request->searchText.'%')
+            ->orWhere('tbl_items.brand', 'LIKE','%'.$request->searchText.'%')
+            ->get(); 
+        }
+
+        return view('searchItem', compact('itemDetails'));
+    }
+
+    public function search(Request $request)
+    {
+        if(is_null($request->id))
+        {
+            $itemDetails=DB::table('tbl_items')
+            ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+            ->get();
+        }
+        else
+        {
+           $itemDetails=DB::table('tbl_items')
+            ->join('tbl_item_type','tbl_item_type.id','=','tbl_items.itemTypeId')
+            ->where('tbl_items.itemTypeId','=', $request->id )
+            ->get(); 
+        }
+                
+
+        return view('searchItem', compact('itemDetails'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -93,7 +165,9 @@ class AddItemController extends Controller
         ->get()
         ->toArray();
         
-        return view('/products', compact('itemDetails'));
+        $itemTypes = DB::table('tbl_item_type')
+        ->get();
+        return view('/products', compact('itemDetails', 'itemTypes'));
     }
 
     /**

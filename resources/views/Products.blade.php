@@ -152,22 +152,66 @@
                     Our Shop
                 </h2>
                 <div class="align-right" style="margin-top: -80px;">
-                <select class="col-lg-2 text-center" style="font-size: 20px;">
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="all">All</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="dirt">Dirt</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="sport">Sport</option>
-                                <option class="mbr-text pl-5 text-warning mbr-fonts-style display-4" value="cruiser">Cruiser</option>
+                <select id="selectType" class="col-lg-2 text-center" style="font-size: 20px;">
+                                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="">All</option>
+                                @foreach($itemTypes as $itemType)
+                                <option class="mbr-text pl-5 mbr-fonts-style display-4" value="{{$itemType->id}}">{{$itemType->itemType}}</option>
+                                @endforeach
                               </select>
-                              
-                                  <input class="" id="txt" type="text" name="searchBy" placeholder="Search" style="font-size: 20px;">
+
+                              <script src="{{ asset('js/app.js') }}"></script>
+                                  <script>
+                                     $(document).ready(function(){
+                                        $('#selectType').change(function(e){
+                                          e.preventDefault();
+                                          var id = $(this).val();
+                                          var resp=$.ajax({
+                                              url: "{{ URL('/searchItem') }}",
+                                              method: 'GET',
+                                              datatype : 'html',
+                                              data: {
+                                                 id : id
+                                              },
+                                              success: function(response){
+                                                console.log(response);
+                                                 $("#dataFound").html(response);
+                                               }     
+                                            });
+                                           });
+
+                                        $('#txt').change(function(e){
+                                          e.preventDefault();
+                                          var textSearch = $('#txt').val();
+                                          var cat = $('#selectType').val();
+                                          $.ajax({
+                                              url: "{{ URL('/txtSearch') }}",
+                                              method: 'GET',
+                                              datatype : 'html',
+                                              data: {
+                                                 searchText : textSearch,
+                                                 categories : cat
+                                              },
+                                              success: function(response){
+                                                console.log(response);
+                                                 $("#dataFound").html(response);
+                                               }     
+                                            });
+                                          // alert(cat);
+                                        });
+                                      });
+                                  </script>
+                                  
+                                  <span class="mbri-search ml-5"></span>
+                                  <input class="pl-2" id="txt" type="text" name="searchBy" placeholder="Search" style="font-size: 20px;">
                                  
-                                    <button type="submit" class="btn btn-primary btn-sm display-4 mb-3" style="border-radius: 20px;"> <span class="mbri-search mr-2"></span>Search</button>
+                                    <!-- <button type="submit" class="btn btn-primary btn-sm display-4 mb-3" id="btnSearch" style="border-radius: 20px;"> <span class="mbri-search mr-2"></span>Search</button> -->
                               </div>
                 
             </div>
             <!--Card-1-->
+            <div id="dataFound" class="col-md-12">
             @foreach ($itemDetails as $data) 
-            <div class="card col-md-3" style="margin-left: 50px;">
+            <div class="card col-md-3" style="margin-left: 50px; float: left;">
                 <div class="card-wrapper">
                     <div class="card-img">
                         <img src="/{{ $data->img }}" alt="bikeImg" title="" height="170">
@@ -282,6 +326,7 @@
                             </div>
                         </div>
             @endforeach
+            </div>
         </div>
     </div>
         
